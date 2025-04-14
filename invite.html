@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthBuild - Invite Friends</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --card-bg: #ffffff;
+            --text-light: #f8f9fa;
+            --text-dark: #343a40;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: var(--text-dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hero {
+            position: relative;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 0 0 20px 20px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            animation: rotate 15s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .user-info {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+
+        .user-info i {
+            margin-right: 8px;
+            color: var(--accent);
+        }
+
+        .logout-btn {
+            margin-left: 10px;
+            background: none;
+            border: none;
+            color: var(--light);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .balance-section {
+            margin-top: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .balance-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .balance-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        .section-title {
+            margin: 30px 0 20px;
+            font-size: 1.5rem;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .invite-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .invite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .invite-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--accent);
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.2;
+            z-index: 1;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .card-title i {
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .invite-details {
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+
+        .copy-btn {
+            margin-left: 10px;
+            background: var(--light);
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .copy-btn:hover {
+            background: #e9ecef;
+        }
+
+        .copy-btn i {
+            font-size: 0.9rem;
+            color: var(--primary);
+        }
+
+        .invite-url-container {
+            display: flex;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 10px;
+            border: 1px solid #e9ecef;
+        }
+
+        .invite-url {
+            flex: 1;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--dark);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .share-btn {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .share-btn i {
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .share-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .share-whatsapp:hover {
+            background: #128C7E;
+        }
+
+        .share-telegram {
+            background: #0088cc;
+            color: white;
+        }
+
+        .share-telegram:hover {
+            background: #006699;
+        }
+
+        .share-facebook {
+            background: #1877F2;
+            color: white;
+        }
+
+        .share-facebook:hover {
+            background: #0D5FAD;
+        }
+
+        .referrals-section {
+            margin-top: 30px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .referrals-list {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .referrals-header {
+            display: flex;
+            background: var(--primary);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+        }
+
+        .referrals-header div {
+            flex: 1;
+        }
+
+        .referrals-body {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .referral-item {
+            display: flex;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f1f3f5;
+            align-items: center;
+        }
+
+        .referral-item:last-child {
+            border-bottom: none;
+        }
+
+        .referral-item div {
+            flex: 1;
+        }
+
+        .referral-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fff3bf;
+            color: #e67700;
+        }
+
+        .status-active {
+            background: #d3f9d8;
+            color: #2b8a3e;
+        }
+
+        .status-rewarded {
+            background: #d0ebff;
+            color: #1971c2;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6c757d;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #e9ecef;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #6c757d;
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item:hover {
+            color: var(--primary);
+        }
+
+        .message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 20px;
+            border-radius: 8px;
+            background-color: rgba(247, 37, 133, 0.2);
+            color: #ff6b9d;
+            border: 1px solid rgba(247, 37, 133, 0.3);
+            z-index: 1000;
+            display: none;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .message.success {
+            background-color: rgba(76, 201, 240, 0.2);
+            color: #8bdbf5;
+            border: 1px solid rgba(76, 201, 240, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: 180px;
+            }
+            
+            .balance-amount {
+                font-size: 1.8rem;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .referrals-header, .referral-item {
+                font-size: 0.9rem;
+                padding: 12px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 160px;
+            }
+            
+            .user-info {
+                top: 15px;
+                right: 15px;
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .balance-section h2 {
+                font-size: 1rem;
+            }
+            
+            .balance-amount {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.3rem;
+                margin: 20px 0 15px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .share-buttons {
+                flex-direction: column;
+            }
+            
+            .invite-card {
+                padding: 20px;
+            }
+        }
+
+        /* Animation classes */
+        .animate-pop {
+            animation: pop 0.4s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.95); opacity: 0; }
+            70% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Message container -->
+    <div id="message" class="message"></div>
+
+    <div class="hero">
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <span id="username">Loading...</span>
+            <button class="logout-btn" id="logoutBtn">Logout</button>
+        </div>
+        
+        <div class="balance-section">
+            <h2>Your Balance</h2>
+            <div>
+                <span class="balance-amount">₦<span id="balance">0.00</span></span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="invite-card animate-pop">
+            <h3 class="card-title">
+                <i class="fas fa-gift"></i> Invite Friends & Earn
+            </h3>
+            <div class="invite-details">
+                <div class="detail-item">
+                    <div class="detail-label">Your Invite Code</div>
+                    <div class="detail-value">
+                        <span id="inviteCode">Loading...</span>
+                        <button class="copy-btn" id="copyCodeBtn">
+                            <i class="far fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Invite URL</div>
+                    <div class="invite-url-container">
+                        <div class="invite-url" id="inviteUrl">Loading...</div>
+                        <button class="copy-btn" id="copyUrlBtn">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="detail-item">
+                    <div class="detail-label">Earn ₦300 for each friend who invests</div>
+                    <div class="detail-value">
+                        <i class="fas fa-coins" style="color: gold; margin-right: 8px;"></i>
+                        <span>Get rewarded instantly when they make their first investment</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="share-buttons">
+                <button class="share-btn share-whatsapp" id="shareWhatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </button>
+                <button class="share-btn share-telegram" id="shareTelegram">
+                    <i class="fab fa-telegram"></i> Telegram
+                </button>
+                <button class="share-btn share-facebook" id="shareFacebook">
+                    <i class="fab fa-facebook"></i> Facebook
+                </button>
+            </div>
+        </div>
+        
+        <div class="referrals-section">
+            <h2 class="section-title">Your Referrals</h2>
+            
+            <div class="stats-container">
+                <div class="stat-card animate-float">
+                    <div class="stat-value" id="totalReferrals">0</div>
+                    <div class="stat-label">Total Referrals</div>
+                </div>
+                <div class="stat-card animate-float" style="animation-delay: 0.2s">
+                    <div class="stat-value" id="activeReferrals">0</div>
+                    <div class="stat-label">Active Investors</div>
+                </div>
+                <div class="stat-card animate-float" style="animation-delay: 0.4s">
+                    <div class="stat-value">₦<span id="totalEarnings">0</span></div>
+                    <div class="stat-label">Total Earnings</div>
+                </div>
+            </div>
+            
+            <div class="referrals-list">
+                <div class="referrals-header">
+                    <div>Name</div>
+                    <div>Date Joined</div>
+                    <div>Status</div>
+                </div>
+                <div class="referrals-body" id="referralsList">
+                    <!-- Referrals will be loaded here -->
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <p>No referrals yet</p>
+                        <p>Share your invite link to start earning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="deposit.html" class="nav-item">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Deposit</span>
+        </a>
+        <a href="withdraw.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>Withdraw</span>
+        </a>
+        <a href="invite.html" class="nav-item active">
+            <i class="fas fa-user-plus"></i>
+            <span>Invite</span>
+        </a>
+    </div>
+
+    <script>
+        // Firebase configuration (must match auth.html)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgOvIkDCcS3DFrt5f6Y7pYmjCoHIfDF9U",
+            authDomain: "moniebase-b4b4d.firebaseapp.com",
+            projectId: "moniebase-b4b4d",
+            storageBucket: "moniebase-b4b4d.appspot.com",
+            messagingSenderId: "1009678808253",
+            appId: "1:1009678808253:android:ff94e94c52bad2db7973d4",
+            databaseURL: "https://moniebase-b4b4d-default-rtdb.firebaseio.com/",
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const mapKey = "danreg";
+
+        // DOM elements
+        const usernameElement = document.getElementById('username');
+        const balanceElement = document.getElementById('balance');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const messageDiv = document.getElementById('message');
+        const inviteCodeElement = document.getElementById('inviteCode');
+        const inviteUrlElement = document.getElementById('inviteUrl');
+        const copyCodeBtn = document.getElementById('copyCodeBtn');
+        const copyUrlBtn = document.getElementById('copyUrlBtn');
+        const shareWhatsapp = document.getElementById('shareWhatsapp');
+        const shareTelegram = document.getElementById('shareTelegram');
+        const shareFacebook = document.getElementById('shareFacebook');
+        const totalReferralsElement = document.getElementById('totalReferrals');
+        const activeReferralsElement = document.getElementById('activeReferrals');
+        const totalEarningsElement = document.getElementById('totalEarnings');
+        const referralsListElement = document.getElementById('referralsList');
+
+        // User data
+        let currentUser = null;
+        let userKey = null;
+        let referrals = [];
+
+        // Show message
+        function showMessage(type, text, duration = 3000) {
+            messageDiv.textContent = text;
+            messageDiv.className = 'message ' + type;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, duration);
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return amount.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+        }
+
+        // Format date
+        function formatDate(timestamp) {
+            if (!timestamp) return 'N/A';
+            const date = new Date(timestamp);
+            return date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        // Generate invite URL
+        function generateInviteUrl(username) {
+            const baseUrl = window.location.href.split('/').slice(0, 3).join('/');
+            return `${baseUrl}/index.html?ref=${encodeURIComponent(username)}`;
+        }
+
+        // Load user data
+        function loadUserData() {
+            const sessionUser = sessionStorage.getItem('currentUser');
+            if (!sessionUser) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            currentUser = JSON.parse(sessionUser);
+            usernameElement.textContent = currentUser.username;
+            balanceElement.textContent = formatCurrency(currentUser.balance || 0);
+            inviteCodeElement.textContent = currentUser.username;
+            inviteUrlElement.textContent = generateInviteUrl(currentUser.username);
+
+            // Find user in database to get the key
+            database.ref(`investment/${mapKey}`).orderByChild('phoneNumber').equalTo(currentUser.phoneNumber).once('value')
+                .then(snapshot => {
+                    if (snapshot.exists()) {
+                        snapshot.forEach(childSnapshot => {
+                            userKey = childSnapshot.key;
+                            currentUser = childSnapshot.val();
+                            currentUser.key = userKey;
+                            
+                            // Update balance display
+                            balanceElement.textContent = formatCurrency(currentUser.balance || 0);
+                            
+                            // Load referrals
+                            loadReferrals();
+                        });
+                    } else {
+                        showMessage('error', 'User not found in database');
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 2000);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading user data:', error);
+                    showMessage('error', 'Error loading user data');
+                });
+        }
+
+        // Load referrals
+        function loadReferrals() {
+            if (!userKey) return;
+
+            database.ref(`referrals/${mapKey}/${userKey}`).once('value')
+                .then(snapshot => {
+                    referrals = [];
+                    let totalReferrals = 0;
+                    let activeReferrals = 0;
+                    let totalEarnings = 0;
+
+                    if (snapshot.exists()) {
+                        snapshot.forEach(childSnapshot => {
+                            const referral = childSnapshot.val();
+                            referral.key = childSnapshot.key;
+                            referrals.push(referral);
+                            
+                            totalReferrals++;
+                            if (referral.status === 'active' || referral.status === 'rewarded') {
+                                activeReferrals++;
+                            }
+                            if (referral.status === 'rewarded') {
+                                totalEarnings += 300; // ₦300 per rewarded referral
+                            }
+                        });
+
+                        // Update stats
+                        totalReferralsElement.textContent = totalReferrals;
+                        activeReferralsElement.textContent = activeReferrals;
+                        totalEarningsElement.textContent = formatCurrency(totalEarnings);
+
+                        // Update referrals list
+                        updateReferralsList();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading referrals:', error);
+                    showMessage('error', 'Error loading referrals data');
+                });
+        }
+
+        // Update referrals list UI
+        function updateReferralsList() {
+            if (referrals.length === 0) {
+                referralsListElement.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <p>No referrals yet</p>
+                        <p>Share your invite link to start earning</p>
+                    </div>
+                `;
+                return;
+            }
+
+            referralsListElement.innerHTML = '';
+            
+            // Sort by date (newest first)
+            referrals.sort((a, b) => (b.joinedAt || 0) - (a.joinedAt || 0));
+            
+            referrals.forEach(referral => {
+                const referralItem = document.createElement('div');
+                referralItem.className = 'referral-item';
+                
+                let statusClass = 'status-pending';
+                let statusText = 'Pending';
+                
+                if (referral.status === 'active') {
+                    statusClass = 'status-active';
+                    statusText = 'Active';
+                } else if (referral.status === 'rewarded') {
+                    statusClass = 'status-rewarded';
+                    statusText = 'Rewarded';
+                }
+                
+                referralItem.innerHTML = `
+                    <div>${referral.username || 'Unknown'}</div>
+                    <div>${formatDate(referral.joinedAt)}</div>
+                    <div><span class="referral-status ${statusClass}">${statusText}</span></div>
+                `;
+                
+                referralsListElement.appendChild(referralItem);
+            });
+        }
+
+        // Copy to clipboard
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    showMessage('success', message);
+                })
+                .catch(err => {
+                    console.error('Failed to copy: ', err);
+                    showMessage('error', 'Failed to copy to clipboard');
+                });
+        }
+
+        // Share functions
+        function shareOnWhatsapp() {
+            const message = `Join me on Facebook Investment and earn daily income! Use my invite code: ${currentUser.username}\n\n${inviteUrlElement.textContent}`;
+            const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareOnTelegram() {
+            const message = `Join me on Facebook Investment and earn daily income! Use my invite code: ${currentUser.username}\n\n${inviteUrlElement.textContent}`;
+            const url = `https://t.me/share/url?url=${encodeURIComponent(inviteUrlElement.textContent)}&text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareOnFacebook() {
+            const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(inviteUrlElement.textContent)}`;
+            window.open(url, '_blank');
+        }
+
+        // Logout
+        function logout() {
+            sessionStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        // Event listeners
+        copyCodeBtn.addEventListener('click', () => {
+            copyToClipboard(currentUser.username, 'Invite code copied to clipboard!');
+        });
+
+        copyUrlBtn.addEventListener('click', () => {
+            copyToClipboard(inviteUrlElement.textContent, 'Invite URL copied to clipboard!');
+        });
+
+        shareWhatsapp.addEventListener('click', shareOnWhatsapp);
+        shareTelegram.addEventListener('click', shareOnTelegram);
+        shareFacebook.addEventListener('click', shareOnFacebook);
+
+        logoutBtn.addEventListener('click', logout);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadUserData();
+            
+            // Listen for new referrals
+            if (userKey) {
+                database.ref(`referrals/${mapKey}/${userKey}`).on('child_added', (snapshot) => {
+                    // Reload referrals when a new one is added
+                    loadReferrals();
+                });
+                
+                database.ref(`referrals/${mapKey}/${userKey}`).on('child_changed', (snapshot) => {
+                    // Reload referrals when status changes
+                    loadReferrals();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
