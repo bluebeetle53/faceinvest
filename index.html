@@ -1,1091 +1,1251 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Facebook Investment - Join Us</title>
     <!-- Favicon and App Icons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4361ee">
-    <meta name="msapplication-TileColor" content="#4361ee">
-    <meta name="theme-color" content="#4361ee">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4361ee" />
+    <meta name="msapplication-TileColor" content="#4361ee" />
+    <meta name="theme-color" content="#4361ee" />
 
     <!-- Primary Meta Tags -->
-    <meta name="title" content="Facebook Investment - Build Your Financial Future">
-    <meta name="description" content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income.">
-    <meta name="keywords" content="investment, earn money, passive income, financial growth, money making, facebook investment, wealth building">
+    <meta
+      name="title"
+      content="Facebook Investment - Build Your Financial Future"
+    />
+    <meta
+      name="description"
+      content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income."
+    />
+    <meta
+      name="keywords"
+      content="investment, earn money, passive income, financial growth, money making, facebook investment, wealth building"
+    />
 
     <!-- Open Graph / Facebook Meta Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourwebsite.com/">
-    <meta property="og:title" content="Facebook Investment - Build Your Financial Future">
-    <meta property="og:description" content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income.">
-    <meta property="og:image" content="https://yourwebsite.com/images/meta-image.jpg">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourwebsite.com/" />
+    <meta
+      property="og:title"
+      content="Facebook Investment - Build Your Financial Future"
+    />
+    <meta
+      property="og:description"
+      content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income."
+    />
+    <meta
+      property="og:image"
+      content="https://yourwebsite.com/images/meta-image.jpg"
+    />
 
     <!-- Twitter Meta Tags -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://yourwebsite.com/">
-    <meta property="twitter:title" content="Facebook Investment - Build Your Financial Future">
-    <meta property="twitter:description" content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income.">
-    <meta property="twitter:image" content="https://yourwebsite.com/images/meta-image.jpg">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://yourwebsite.com/" />
+    <meta
+      property="twitter:title"
+      content="Facebook Investment - Build Your Financial Future"
+    />
+    <meta
+      property="twitter:description"
+      content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income."
+    />
+    <meta
+      property="twitter:image"
+      content="https://yourwebsite.com/images/meta-image.jpg"
+    />
 
     <!-- Canonical URL -->
     <link rel="canonical" href="https://yourwebsite.com/" />
 
     <!-- Mobile Specific Meta -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="mobile-web-app-capable" content="yes">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
 
     <!-- PWA Manifest -->
-    <link rel="manifest" href="/manifest.json">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="manifest" href="/manifest.json" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <style>
-        :root {
-            --primary: #4361ee;
-            --secondary: #3f37c9;
-            --accent: #4895ef;
-            --light: #f8f9fa;
-            --dark: #212529;
-            --success: #4cc9f0;
-            --danger: #f72585;
-            --warning: #f8961e;
-            --info: #560bad;
-        }
+      :root {
+        --primary: #4361ee;
+        --secondary: #3f37c9;
+        --accent: #4895ef;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --success: #4cc9f0;
+        --danger: #f72585;
+        --warning: #f8961e;
+        --info: #560bad;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
 
-        body {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--light);
-            overflow-x: hidden;
-        }
+      body {
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--light);
+        overflow-x: hidden;
+      }
 
-        .floating-bubbles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
+      .floating-bubbles {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+      }
 
-        .bubble {
-            position: absolute;
-            bottom: -100px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float linear infinite;
-        }
+      .bubble {
+        position: absolute;
+        bottom: -100px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        animation: float linear infinite;
+      }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-1000px) rotate(720deg);
-                opacity: 0;
-            }
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 1;
         }
+        100% {
+          transform: translateY(-1000px) rotate(720deg);
+          opacity: 0;
+        }
+      }
 
+      .container {
+        width: 90%;
+        max-width: 450px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        position: relative;
+        z-index: 10;
+        transform-style: preserve-3d;
+        transition: all 0.5s ease;
+      }
+
+      .container:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 35px 60px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px 0 20px;
+        flex-direction: column;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: contain;
+        background: white;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.1) rotate(10deg);
+      }
+
+      .logo-text {
+        font-size: 28px;
+        font-weight: 700;
+        background: linear-gradient(to right, #4cc9f0, #4361ee);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 5px;
+        letter-spacing: 1px;
+      }
+
+      .logo-subtext {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 20px;
+      }
+
+      .tabs {
+        display: flex;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .tab {
+        flex: 1;
+        text-align: center;
+        padding: 15px 0;
+        cursor: pointer;
+        position: relative;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.7);
+        transition: all 0.3s ease;
+      }
+
+      .tab.active {
+        color: white;
+        font-weight: 600;
+      }
+
+      .tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%;
+        height: 3px;
+        background: linear-gradient(to right, #4cc9f0, #4361ee);
+        border-radius: 3px 3px 0 0;
+      }
+
+      .tab:hover:not(.active) {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .form-container {
+        padding: 30px;
+      }
+
+      .form {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .form.active {
+        display: block;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 12px 15px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        color: white;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .input-group input:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.2);
+        background: rgba(255, 255, 255, 0.15);
+      }
+
+      .input-group input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      .optional {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 12px;
+        margin-left: 5px;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(to right, #4cc9f0, #4361ee);
+        color: white;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 16px;
+        margin-top: 10px;
+        box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
+      }
+
+      .btn:active {
+        transform: translateY(0);
+      }
+
+      .forgot-password {
+        text-align: right;
+        margin-top: 10px;
+      }
+
+      .forgot-password a {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 13px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .forgot-password a:hover {
+        color: var(--accent);
+      }
+
+      .message {
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+        font-size: 14px;
+        display: none;
+      }
+
+      .error {
+        background-color: rgba(247, 37, 133, 0.2);
+        color: #ff6b9d;
+        border: 1px solid rgba(247, 37, 133, 0.3);
+      }
+
+      .success {
+        background-color: rgba(76, 201, 240, 0.2);
+        color: #8bdbf5;
+        border: 1px solid rgba(76, 201, 240, 0.3);
+      }
+
+      .spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+        vertical-align: middle;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .footer a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .footer a:hover {
+        color: var(--accent);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 480px) {
         .container {
-            width: 90%;
-            max-width: 450px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-            position: relative;
-            z-index: 10;
-            transform-style: preserve-3d;
-            transition: all 0.5s ease;
-        }
-
-        .container:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.3);
-        }
-
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 0 20px;
-            flex-direction: column;
-        }
-
-        .logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: contain;
-            background: white;
-            padding: 10px;
-            margin-bottom: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        .logo-text {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(to right, #4cc9f0, #4361ee);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-
-        .logo-subtext {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 20px;
-        }
-
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .tab {
-            flex: 1;
-            text-align: center;
-            padding: 15px 0;
-            cursor: pointer;
-            position: relative;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.7);
-            transition: all 0.3s ease;
-        }
-
-        .tab.active {
-            color: white;
-            font-weight: 600;
-        }
-
-        .tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-            height: 3px;
-            background: linear-gradient(to right, #4cc9f0, #4361ee);
-            border-radius: 3px 3px 0 0;
-        }
-
-        .tab:hover:not(.active) {
-            color: rgba(255, 255, 255, 0.9);
+          width: 95%;
         }
 
         .form-container {
-            padding: 30px;
+          padding: 20px;
         }
 
-        .form {
-            display: none;
-            animation: fadeIn 0.5s ease;
+        .logo {
+          width: 70px;
+          height: 70px;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .logo-text {
+          font-size: 24px;
         }
+      }
 
-        .form.active {
-            display: block;
-        }
+      /* Glow effect */
+      .glow {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(72, 149, 239, 0.3) 0%,
+          rgba(72, 149, 239, 0) 70%
+        );
+        filter: blur(20px);
+        z-index: -1;
+        animation: pulse 4s infinite alternate;
+      }
 
-        .input-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
+      .glow-1 {
+        top: -50px;
+        left: -50px;
+      }
 
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.8);
-        }
+      .glow-2 {
+        bottom: -50px;
+        right: -50px;
+        animation-delay: 1s;
+      }
 
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: white;
-            font-size: 14px;
-            transition: all 0.3s ease;
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          opacity: 0.5;
         }
+        100% {
+          transform: scale(1.2);
+          opacity: 0.8;
+        }
+      }
 
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(72, 149, 239, 0.2);
-            background: rgba(255, 255, 255, 0.15);
-        }
+      /* Particle animation */
+      .particle {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        animation: particle-float linear infinite;
+      }
 
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+      @keyframes particle-float {
+        0% {
+          transform: translateY(0) translateX(0);
+          opacity: 0;
         }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) translateX(20px);
+          opacity: 0;
+        }
+      }
 
-        .optional {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 12px;
-            margin-left: 5px;
-        }
+      /* Install App Popup Styles */
+      .install-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s ease-out;
+      }
 
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            background: linear-gradient(to right, #4cc9f0, #4361ee);
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 16px;
-            margin-top: 10px;
-            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
-        }
+      .install-popup-content {
+        background: white;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 400px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transform: translateY(20px);
+        animation: slideUp 0.4s ease-out forwards;
+      }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(67, 97, 238, 0.4);
-        }
+      .install-popup-header {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
 
-        .btn:active {
-            transform: translateY(0);
-        }
+      .install-popup-header i {
+        font-size: 24px;
+        margin-right: 15px;
+      }
 
-        .forgot-password {
-            text-align: right;
-            margin-top: 10px;
-        }
+      .install-popup-header h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        flex: 1;
+      }
 
-        .forgot-password a {
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 13px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+      .install-close-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        line-height: 1;
+      }
 
-        .forgot-password a:hover {
-            color: var(--accent);
-        }
+      .install-popup-body {
+        padding: 20px;
+        color: var(--text-dark);
+      }
 
-        .message {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 12px 20px;
-            border-radius: 8px;
-            background-color: rgba(247, 37, 133, 0.2);
-            color: #ff6b9d;
-            border: 1px solid rgba(247, 37, 133, 0.3);
-            z-index: 1000;
-            display: none;
-            max-width: 90%;
-            text-align: center;
-        }
+      .install-popup-body p {
+        margin-bottom: 20px;
+        line-height: 1.5;
+      }
 
-        .message.success {
-            background-color: rgba(76, 201, 240, 0.2);
-            color: #8bdbf5;
-            border: 1px solid rgba(76, 201, 240, 0.3);
-        }
+      .install-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
 
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
+      .install-step {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+      .step-number {
+        background: var(--accent);
+        color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
 
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
-        }
+      .install-popup-footer {
+        padding: 15px 20px;
+        background: #f8f9fa;
+        text-align: center;
+      }
 
-        .footer a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
+      .install-btn {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 20px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+      }
 
-        .footer a:hover {
-            color: var(--accent);
-        }
+      .install-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+      }
 
-        /* Responsive adjustments */
-        @media (max-width: 480px) {
-            .container {
-                width: 95%;
-            }
-            
-            .form-container {
-                padding: 20px;
-            }
-            
-            .logo {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .logo-text {
-                font-size: 24px;
-            }
-        }
+      .install-btn:active {
+        transform: translateY(0);
+      }
 
-        /* Glow effect */
-        .glow {
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(72, 149, 239, 0.3) 0%, rgba(72, 149, 239, 0) 70%);
-            filter: blur(20px);
-            z-index: -1;
-            animation: pulse 4s infinite alternate;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
+        to {
+          opacity: 1;
+        }
+      }
 
-        .glow-1 {
-            top: -50px;
-            left: -50px;
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
         }
+        to {
+          transform: translateY(0);
+        }
+      }
 
-        .glow-2 {
-            bottom: -50px;
-            right: -50px;
-            animation-delay: 1s;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 0.8; }
-        }
-
-        /* Particle animation */
-        .particle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            animation: particle-float linear infinite;
-        }
-
-        @keyframes particle-float {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(20px); opacity: 0; }
-        }
-
-        /* Install App Popup Styles */
-        .install-popup {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease-out;
-        }
-        
+      @media (max-width: 480px) {
         .install-popup-content {
-            background: white;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 400px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            transform: translateY(20px);
-            animation: slideUp 0.4s ease-out forwards;
-        }
-        
-        .install-popup-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-        
-        .install-popup-header i {
-            font-size: 24px;
-            margin-right: 15px;
-        }
-        
-        .install-popup-header h3 {
-            margin: 0;
-            font-size: 1.2rem;
-            flex: 1;
-        }
-        
-        .install-close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            padding: 0;
-            margin: 0;
-            line-height: 1;
-        }
-        
-        .install-popup-body {
-            padding: 20px;
-            color: var(--text-dark);
-        }
-        
-        .install-popup-body p {
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        
-        .install-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .install-step {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .step-number {
-            background: var(--accent);
-            color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-        
-        .install-popup-footer {
-            padding: 15px 20px;
-            background: #f8f9fa;
-            text-align: center;
-        }
-        
-        .install-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 12px 20px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .install-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
-        }
-        
-        .install-btn:active {
-            transform: translateY(0);
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideUp {
-            from { transform: translateY(20px); }
-            to { transform: translateY(0); }
-        }
-        
-        @media (max-width: 480px) {
-            .install-popup-content {
-                width: 95%;
-            }
-            
-            .install-popup-header {
-                padding: 15px;
-            }
-            
-            .install-popup-header h3 {
-                font-size: 1.1rem;
-            }
+          width: 95%;
         }
 
-        /* Referral notice */
-        .referral-notice {
-            background: rgba(76, 201, 240, 0.2);
-            border: 1px solid rgba(76, 201, 240, 0.3);
-            color: #8bdbf5;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 14px;
-            display: none;
+        .install-popup-header {
+          padding: 15px;
         }
+
+        .install-popup-header h3 {
+          font-size: 1.1rem;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Floating bubbles background -->
     <div class="floating-bubbles"></div>
-    
+
     <!-- Glow effects -->
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
-    
+
     <!-- Main container -->
     <div class="container animate__animated animate__fadeIn">
-        <!-- Logo -->
-        <div class="logo-container">
-            <img src="https://png.pngtree.com/png-clipart/20230401/original/pngtree-facebook-icon-png-image_9015416.png" alt="Fame Investment Logo" class="logo animate__animated animate__bounceIn">
-            <div class="logo-text animate__animated animate__fadeInUp">Facebook Investment</div>
-            <div class="logo-subtext animate__animated animate__fadeInUp animate__delay-1s">Build your financial future</div>
+      <!-- Logo -->
+      <div class="logo-container">
+        <img
+          src="https://png.pngtree.com/png-clipart/20230401/original/pngtree-facebook-icon-png-image_9015416.png"
+          alt="Fame Investment Logo"
+          class="logo animate__animated animate__bounceIn"
+        />
+        <div class="logo-text animate__animated animate__fadeInUp">
+          Facebook Investment
         </div>
-        
-        <!-- Tabs -->
-        <div class="tabs">
-            <div class="tab active" data-tab="login">Login</div>
-            <div class="tab" data-tab="signup">Sign Up</div>
+        <div
+          class="logo-subtext animate__animated animate__fadeInUp animate__delay-1s"
+        >
+          Build your financial future
         </div>
-        
-        <!-- Message container -->
-        <div id="message" class="message" style="display: none;"></div>
+      </div>
 
-        <!-- Referral notice -->
-        <div id="referralNotice" class="referral-notice" style="display: none;">
-            You're joining with a referral from <strong id="referrerName"></strong>! Both of you will earn rewards when you make your first investment.
-        </div>
-        
-        <!-- Forms container -->
-        <div class="form-container">
-            <!-- Login Form -->
-            <form id="loginForm" class="form active">
-                <div class="input-group">
-                    <label for="loginPhone">Phone Number</label>
-                    <input type="tel" id="loginPhone" placeholder="Enter your phone number" required>
-                </div>
-                <div class="input-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
-                </div>
-                <div class="forgot-password">
-                    <a href="#" id="forgotPassword">Forgot Password?</a>
-                </div>
-                <button type="submit" class="btn" id="loginBtn">
-                    <span id="loginBtnText">Login</span>
-                </button>
-            </form>
-            
-            <!-- Signup Form -->
-            <form id="signupForm" class="form">
-                <div class="input-group">
-                    <label for="signupUsername">Username</label>
-                    <input type="text" id="signupUsername" placeholder="Choose a username" required>
-                </div>
-                <div class="input-group">
-                    <label for="signupPhone">Phone Number</label>
-                    <input type="tel" id="signupPhone" placeholder="Enter your phone number" required>
-                </div>
-                <div class="input-group">
-                    <label for="signupPassword">Password</label>
-                    <input type="password" id="signupPassword" placeholder="Create a password" required>
-                </div>
-                <div class="input-group">
-                    <label for="inviteCode">Invite Code <span class="optional">(optional)</span></label>
-                    <input type="text" id="inviteCode" placeholder="Enter invite code if any">
-                </div>
-                <button type="submit" class="btn" id="signupBtn">
-                    <span id="signupBtnText">Create Account</span>
-                </button>
-            </form>
-        </div>
-        
-        <!-- Install App Popup -->
-        <div id="installAppPopup" class="install-popup" style="display: none;">
-            <div class="install-popup-content">
-                <div class="install-popup-header">
-                    <i class="fas fa-download"></i>
-                    <h3>Install Facebook Investment</h3>
-                    <button id="closeInstallPopup" class="install-close-btn">&times;</button>
-                </div>
-                <div class="install-popup-body">
-                    <p>Add Facebook Investment to your home screen for quick access and a better experience.</p>
-                    <div class="install-steps">
-                        <div class="install-step">
-                            <div class="step-number">1</div>
-                            <p>Tap the <i class="fas fa-share"></i> Share button</p>
-                        </div>
-                        <div class="install-step">
-                            <div class="step-number">2</div>
-                            <p>Select "Add to Home Screen"</p>
-                        </div>
-                        <div class="install-step">
-                            <div class="step-number">3</div>
-                            <p>Confirm by tapping "Add"</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="install-popup-footer">
-                    <button id="installAppBtn" class="install-btn">
-                        <i class="fas fa-plus-circle"></i> Install Now
-                    </button>
-                </div>
+      <!-- Tabs -->
+      <div class="tabs">
+        <div class="tab active" data-tab="login">Login</div>
+        <div class="tab" data-tab="signup">Sign Up</div>
+      </div>
+
+      <!-- Message container -->
+      <div id="message" class="message" style="display: none"></div>
+
+      <!-- Forms container -->
+      <div class="form-container">
+        <!-- Login Form -->
+        <form id="loginForm" class="form active">
+          <div class="input-group">
+            <label for="loginPhone">Phone Number</label>
+            <input
+              type="tel"
+              id="loginPhone"
+              placeholder="Enter your phone number"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="loginPassword">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <div class="forgot-password">
+            <a href="#" id="forgotPassword">Forgot Password?</a>
+          </div>
+          <button type="submit" class="btn" id="loginBtn">
+            <span id="loginBtnText">Login</span>
+          </button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" class="form">
+          <div class="input-group">
+            <label for="signupUsername">Username</label>
+            <input
+              type="text"
+              id="signupUsername"
+              placeholder="Choose a username"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="signupPhone">Phone Number</label>
+            <input
+              type="tel"
+              id="signupPhone"
+              placeholder="Enter your phone number"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="signupPassword">Password</label>
+            <input
+              type="password"
+              id="signupPassword"
+              placeholder="Create a password"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <label for="inviteCode"
+              >Invite Code <span class="optional">(optional)</span></label
+            >
+            <input
+              type="text"
+              id="inviteCode"
+              placeholder="Enter invite code if any"
+            />
+          </div>
+          <button type="submit" class="btn" id="signupBtn">
+            <span id="signupBtnText">Create Account</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Install App Popup -->
+      <div id="installAppPopup" class="install-popup" style="display: none">
+        <div class="install-popup-content">
+          <div class="install-popup-header">
+            <i class="fas fa-download"></i>
+            <h3>Install Facebook Investment</h3>
+            <button id="closeInstallPopup" class="install-close-btn">
+              &times;
+            </button>
+          </div>
+          <div class="install-popup-body">
+            <p>
+              Add Facebook Investment to your home screen for quick access and a
+              better experience.
+            </p>
+            <div class="install-steps">
+              <div class="install-step">
+                <div class="step-number">1</div>
+                <p>Tap the <i class="fas fa-share"></i> Share button</p>
+              </div>
+              <div class="install-step">
+                <div class="step-number">2</div>
+                <p>Select "Add to Home Screen"</p>
+              </div>
+              <div class="install-step">
+                <div class="step-number">3</div>
+                <p>Confirm by tapping "Add"</p>
+              </div>
             </div>
+          </div>
+          <div class="install-popup-footer">
+            <button id="installAppBtn" class="install-btn">
+              <i class="fas fa-plus-circle"></i> Install Now
+            </button>
+          </div>
         </div>
+      </div>
 
-        <!-- Footer -->
-        <div class="footer animate__animated animate__fadeIn animate__delay-1s">
-            <p>© 2025 Facebook Investment. All rights reserved. <br> <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a></p>
-        </div>
+      <!-- Footer -->
+      <div class="footer animate__animated animate__fadeIn animate__delay-1s">
+        <p>
+          © 2025 Facebook Investment. All rights reserved. <br />
+          <a href="#">Terms of Service</a> | <a href="#">Privacy Policy</a>
+        </p>
+      </div>
     </div>
 
     <script>
-        // Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyCgOvIkDCcS3DFrt5f6Y7pYmjCoHIfDF9U",
-            authDomain: "moniebase-b4b4d.firebaseapp.com",
-            projectId: "moniebase-b4b4d",
-            storageBucket: "moniebase-b4b4d.appspot.com",
-            messagingSenderId: "1009678808253",
-            appId: "1:1009678808253:android:ff94e94c52bad2db7973d4",
-            databaseURL: "https://moniebase-b4b4d-default-rtdb.firebaseio.com/",
-        };
+      // Firebase configuration - Must match across all pages
+      const firebaseConfig = {
+        apiKey: "AIzaSyCgOvIkDCcS3DFrt5f6Y7pYmjCoHIfDF9U",
+        authDomain: "moniebase-b4b4d.firebaseapp.com",
+        projectId: "moniebase-b4b4d",
+        storageBucket: "moniebase-b4b4d.appspot.com",
+        messagingSenderId: "1009678808253",
+        appId: "1:1009678808253:android:ff94e94c52bad2db7973d4",
+        databaseURL: "https://moniebase-b4b4d-default-rtdb.firebaseio.com/",
+      };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
-        const mapKey = "danreg";
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+      const mapKey = "danreg";
 
-        // DOM elements
-        const loginForm = document.getElementById('loginForm');
-        const signupForm = document.getElementById('signupForm');
-        const loginBtn = document.getElementById('loginBtn');
-        const loginBtnText = document.getElementById('loginBtnText');
-        const signupBtn = document.getElementById('signupBtn');
-        const signupBtnText = document.getElementById('signupBtnText');
-        const messageDiv = document.getElementById('message');
-        const tabs = document.querySelectorAll('.tab');
-        const forms = document.querySelectorAll('.form');
-        const floatingBubbles = document.querySelector('.floating-bubbles');
-        const referralNotice = document.getElementById('referralNotice');
-        const referrerNameElement = document.getElementById('referrerName');
-        const inviteCodeInput = document.getElementById('inviteCode');
+      // DOM elements
+      const loginForm = document.getElementById("loginForm");
+      const signupForm = document.getElementById("signupForm");
+      const loginBtn = document.getElementById("loginBtn");
+      const loginBtnText = document.getElementById("loginBtnText");
+      const signupBtn = document.getElementById("signupBtn");
+      const signupBtnText = document.getElementById("signupBtnText");
+      const messageDiv = document.getElementById("message");
+      const tabs = document.querySelectorAll(".tab");
+      const forms = document.querySelectorAll(".form");
+      const floatingBubbles = document.querySelector(".floating-bubbles");
 
-        // Check for referral code in URL
-        function checkForReferral() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const refCode = urlParams.get('ref');
-            
-            if (refCode) {
-                // Check if referrer exists
-                database.ref(`investment/${mapKey}`).orderByChild('username').equalTo(refCode).once('value')
-                    .then(snapshot => {
-                        if (snapshot.exists()) {
-                            // Show referral notice and pre-fill invite code
-                            snapshot.forEach(childSnapshot => {
-                                const referrer = childSnapshot.val();
-                                referrerNameElement.textContent = referrer.username;
-                                referralNotice.style.display = 'block';
-                                inviteCodeInput.value = refCode;
-                            });
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error checking referrer:', error);
-                    });
-            }
+      // Create bubbles
+      function createBubbles() {
+        for (let i = 0; i < 20; i++) {
+          const bubble = document.createElement("div");
+          bubble.classList.add("bubble");
+
+          // Random size between 10 and 100px
+          const size = Math.random() * 90 + 10;
+          bubble.style.width = `${size}px`;
+          bubble.style.height = `${size}px`;
+
+          // Random position
+          bubble.style.left = `${Math.random() * 100}%`;
+
+          // Random animation duration between 10 and 20s
+          const duration = Math.random() * 10 + 10;
+          bubble.style.animationDuration = `${duration}s`;
+
+          // Random delay
+          bubble.style.animationDelay = `${Math.random() * 5}s`;
+
+          floatingBubbles.appendChild(bubble);
         }
+      }
 
-        // Create bubbles
-        function createBubbles() {
-            for (let i = 0; i < 20; i++) {
-                const bubble = document.createElement('div');
-                bubble.classList.add('bubble');
-                
-                // Random size between 10 and 100px
-                const size = Math.random() * 90 + 10;
-                bubble.style.width = `${size}px`;
-                bubble.style.height = `${size}px`;
-                
-                // Random position
-                bubble.style.left = `${Math.random() * 100}%`;
-                
-                // Random animation duration between 10 and 20s
-                const duration = Math.random() * 10 + 10;
-                bubble.style.animationDuration = `${duration}s`;
-                
-                // Random delay
-                bubble.style.animationDelay = `${Math.random() * 5}s`;
-                
-                floatingBubbles.appendChild(bubble);
-            }
+      // Create particles
+      function createParticles() {
+        const container = document.querySelector(".container");
+
+        for (let i = 0; i < 15; i++) {
+          const particle = document.createElement("div");
+          particle.classList.add("particle");
+
+          // Random position
+          const posX = Math.random() * 100;
+          const posY = Math.random() * 100 + 100;
+          particle.style.left = `${posX}%`;
+          particle.style.top = `${posY}%`;
+
+          // Random size
+          const size = Math.random() * 3 + 2;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+
+          // Random animation duration
+          const duration = Math.random() * 5 + 5;
+          particle.style.animationDuration = `${duration}s`;
+
+          // Random delay
+          particle.style.animationDelay = `${Math.random() * 5}s`;
+
+          container.appendChild(particle);
         }
+      }
 
-        // Create particles
-        function createParticles() {
-            const container = document.querySelector('.container');
-            
-            for (let i = 0; i < 15; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random position
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100 + 100;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                
-                // Random size
-                const size = Math.random() * 3 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random animation duration
-                const duration = Math.random() * 5 + 5;
-                particle.style.animationDuration = `${duration}s`;
-                
-                // Random delay
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                
-                container.appendChild(particle);
-            }
+      // Show message
+      function showMessage(type, text) {
+        messageDiv.textContent = text;
+        messageDiv.className = "message " + type;
+        messageDiv.style.display = "block";
+
+        // Hide message after 5 seconds
+        setTimeout(() => {
+          messageDiv.style.display = "none";
+        }, 5000);
+      }
+
+      // Switch between tabs
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          // Remove active class from all tabs and forms
+          tabs.forEach((t) => t.classList.remove("active"));
+          forms.forEach((f) => f.classList.remove("active"));
+
+          // Add active class to clicked tab and corresponding form
+          tab.classList.add("active");
+          const formId = tab.getAttribute("data-tab") + "Form";
+          document.getElementById(formId).classList.add("active");
+
+          // Reset forms and messages
+          loginForm.reset();
+          signupForm.reset();
+          messageDiv.style.display = "none";
+        });
+      });
+
+      // Check for referral code in URL
+      function checkReferralCode() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const refCode = urlParams.get('ref');
+        
+        if (refCode) {
+          // Switch to signup tab
+          tabs.forEach(t => t.classList.remove('active'));
+          forms.forEach(f => f.classList.remove('active'));
+          
+          document.querySelector('[data-tab="signup"]').classList.add('active');
+          document.getElementById('signupForm').classList.add('active');
+          
+          // Fill in the invite code field
+          document.getElementById('inviteCode').value = refCode;
+          showMessage('success', `Using invite code: ${refCode}`);
         }
+      }
 
-        // Show message
-        function showMessage(type, text) {
-            messageDiv.textContent = text;
-            messageDiv.className = 'message ' + type;
-            messageDiv.style.display = 'block';
-            
-            // Hide message after 5 seconds
-            setTimeout(() => {
-                messageDiv.style.display = 'none';
-            }, 5000);
-        }
+      // Login function
+      async function login(phone, password) {
+        try {
+          // Show loading state
+          loginBtn.disabled = true;
+          loginBtnText.innerHTML =
+            '<span class="spinner"></span> Logging in...';
 
-        // Switch between tabs
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs and forms
-                tabs.forEach(t => t.classList.remove('active'));
-                forms.forEach(f => f.classList.remove('active'));
-                
-                // Add active class to clicked tab and corresponding form
-                tab.classList.add('active');
-                const formId = tab.getAttribute('data-tab') + 'Form';
-                document.getElementById(formId).classList.add('active');
-                
-                // Reset forms and messages
-                loginForm.reset();
-                signupForm.reset();
-                messageDiv.style.display = 'none';
+          // Check if user exists in database
+          const snapshot = await database
+            .ref(`investment/${mapKey}`)
+            .orderByChild("phoneNumber")
+            .equalTo(phone)
+            .once("value");
+
+          if (snapshot.exists()) {
+            let userFound = false;
+            let userKey = "";
+            let userData = null;
+
+            snapshot.forEach((childSnapshot) => {
+              userKey = childSnapshot.key;
+              userData = childSnapshot.val();
+
+              if (userData.password === password) {
+                userFound = true;
+                return true; // Break the loop
+              }
             });
-        });
 
-        // Login function
-        async function login(phone, password) {
-            try {
-                // Show loading state
-                loginBtn.disabled = true;
-                loginBtnText.innerHTML = '<span class="spinner"></span> Logging in...';
-                
-                // Check if user exists in database
-                const snapshot = await database.ref(`investment/${mapKey}`).orderByChild('phoneNumber').equalTo(phone).once('value');
-                
-                if (snapshot.exists()) {
-                    let userFound = false;
-                    let userKey = '';
-                    let userData = null;
-                    
-                    snapshot.forEach(childSnapshot => {
-                        userKey = childSnapshot.key;
-                        userData = childSnapshot.val();
-                        
-                        if (userData.password === password) {
-                            userFound = true;
-                            return true; // Break the loop
-                        }
-                    });
-                    
-                    if (userFound) {
-                        // Store user data in session storage
-                        sessionStorage.setItem('currentUser', JSON.stringify({
-                            username: userData.username,
-                            phoneNumber: userData.phoneNumber,
-                            balance: userData.balance
-                        }));
-                        
-                        // Redirect to home page after a short delay
-                        setTimeout(() => {
-                            window.location.href = 'home.html';
-                        }, 1000);
-                        
-                        return true;
-                    } else {
-                        showMessage('error', 'Invalid phone number or password');
-                        return false;
-                    }
-                } else {
-                    showMessage('error', 'User not found. Please sign up.');
-                    return false;
-                }
-            } catch (error) {
-                console.error('Login error:', error);
-                showMessage('error', 'An error occurred during login. Please try again.');
-                return false;
-            } finally {
-                // Reset button state
-                loginBtn.disabled = false;
-                loginBtnText.textContent = 'Login';
+            if (userFound) {
+              // Store user data in session storage
+              sessionStorage.setItem(
+                "currentUser",
+                JSON.stringify({
+                  username: userData.username,
+                  phoneNumber: userData.phoneNumber,
+                  balance: userData.balance || 0,
+                  key: userKey
+                })
+              );
+
+              // Redirect to home page after a short delay
+              setTimeout(() => {
+                window.location.href = "home.html";
+              }, 1000);
+
+              return true;
+            } else {
+              showMessage("error", "Invalid phone number or password");
+              return false;
             }
+          } else {
+            showMessage("error", "User not found. Please sign up.");
+            return false;
+          }
+        } catch (error) {
+          console.error("Login error:", error);
+          showMessage(
+            "error",
+            "An error occurred during login. Please try again."
+          );
+          return false;
+        } finally {
+          // Reset button state
+          loginBtn.disabled = false;
+          loginBtnText.textContent = "Login";
         }
+      }
 
-        // Signup function
-        async function signup(username, phone, password, inviteCode) {
-            try {
-                // Show loading state
-                signupBtn.disabled = true;
-                signupBtnText.innerHTML = '<span class="spinner"></span> Creating account...';
-                
-                // Check if phone number already exists
-                const phoneCheck = await database.ref(`investment/${mapKey}`).orderByChild('phoneNumber').equalTo(phone).once('value');
-                
-                if (phoneCheck.exists()) {
-                    showMessage('error', 'Phone number already registered. Please login instead.');
-                    return false;
-                }
-                
-                // Check if username already exists
-                const usernameCheck = await database.ref(`investment/${mapKey}`).orderByChild('username').equalTo(username).once('value');
-                
-                if (usernameCheck.exists()) {
-                    showMessage('error', 'Username already taken. Please choose another.');
-                    return false;
-                }
-                
-                // Create new user
-                const newUserRef = database.ref(`investment/${mapKey}`).push();
-                await newUserRef.set({
-                    username: username,
-                    phoneNumber: phone,
-                    password: password,
-                    inviteCode: inviteCode || '',
-                    balance: 0.00,
-                    createdAt: firebase.database.ServerValue.TIMESTAMP
-                });
+      // Signup function
+      async function signup(username, phone, password, inviteCode) {
+        try {
+          // Show loading state
+          signupBtn.disabled = true;
+          signupBtnText.innerHTML =
+            '<span class="spinner"></span> Creating account...';
 
-                // If there was an invite code, create a referral record
-                if (inviteCode) {
-                    // Find the referrer by username
-                    const referrerSnapshot = await database.ref(`investment/${mapKey}`).orderByChild('username').equalTo(inviteCode).once('value');
-                    
-                    if (referrerSnapshot.exists()) {
-                        referrerSnapshot.forEach(referrerChild => {
-                            const referrerKey = referrerChild.key;
-                            
-                            // Create referral record
-                            database.ref(`referrals/${mapKey}/${referrerKey}`).push().set({
-                                username: username,
-                                phoneNumber: phone,
-                                joinedAt: firebase.database.ServerValue.TIMESTAMP,
-                                status: 'pending', // Will change to 'active' when user makes first investment
-                                rewardAmount: 300 // ₦300 reward
-                            });
-                        });
-                    }
-                }
-                
-                // Store user data in session storage
-                sessionStorage.setItem('currentUser', JSON.stringify({
-                    username: username,
-                    phoneNumber: phone,
-                    balance: 0.00
-                }));
-                
-                showMessage('success', 'Account created successfully! Redirecting...');
-                
-                // Redirect to home page after a short delay
-                setTimeout(() => {
-                    window.location.href = 'home.html';
-                }, 1500);
-                
-                return true;
-            } catch (error) {
-                console.error('Signup error:', error);
-                showMessage('error', 'An error occurred during signup. Please try again.');
-                return false;
-            } finally {
-                // Reset button state
-                signupBtn.disabled = false;
-                signupBtnText.textContent = 'Create Account';
-            }
+          // Check if phone number already exists
+          const phoneCheck = await database
+            .ref(`investment/${mapKey}`)
+            .orderByChild("phoneNumber")
+            .equalTo(phone)
+            .once("value");
+
+          if (phoneCheck.exists()) {
+            showMessage(
+              "error",
+              "Phone number already registered. Please login instead."
+            );
+            return false;
+          }
+
+          // Check if username already exists
+          const usernameCheck = await database
+            .ref(`investment/${mapKey}`)
+            .orderByChild("username")
+            .equalTo(username)
+            .once("value");
+
+          if (usernameCheck.exists()) {
+            showMessage(
+              "error",
+              "Username already taken. Please choose another."
+            );
+            return false;
+          }
+
+          // Create new user
+          const newUserRef = database.ref(`investment/${mapKey}`).push();
+          const userData = {
+            username: username,
+            phoneNumber: phone,
+            password: password,
+            inviteCode: inviteCode || "",
+            balance: 0.0,
+            createdAt: firebase.database.ServerValue.TIMESTAMP,
+          };
+          
+          await newUserRef.set(userData);
+          
+          // Process referral if invite code was used
+          if (inviteCode) {
+            processReferral(inviteCode, username, newUserRef.key);
+          }
+
+          // Store user data in session storage
+          sessionStorage.setItem(
+            "currentUser",
+            JSON.stringify({
+              username: username,
+              phoneNumber: phone,
+              balance: 0.0,
+              key: newUserRef.key
+            })
+          );
+
+          showMessage(
+            "success",
+            "Account created successfully! Redirecting..."
+          );
+
+          // Redirect to home page after a short delay
+          setTimeout(() => {
+            window.location.href = "home.html";
+          }, 1500);
+
+          return true;
+        } catch (error) {
+          console.error("Signup error:", error);
+          showMessage(
+            "error",
+            "An error occurred during signup. Please try again."
+          );
+          return false;
+        } finally {
+          // Reset button state
+          signupBtn.disabled = false;
+          signupBtnText.textContent = "Create Account";
         }
-
-        // Form event listeners
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const phone = document.getElementById('loginPhone').value.trim();
-            const password = document.getElementById('loginPassword').value.trim();
+      }
+      
+      // Process referral
+      async function processReferral(inviterUsername, newUsername, newUserKey) {
+        try {
+          // Find the inviter by username
+          const inviterSnapshot = await database
+            .ref(`investment/${mapKey}`)
+            .orderByChild("username")
+            .equalTo(inviterUsername)
+            .once("value");
             
-            if (!phone || !password) {
-                showMessage('error', 'Please fill in all fields');
-                return;
-            }
+          if (inviterSnapshot.exists()) {
+            let inviterKey = null;
             
-            await login(phone, password);
-        });
-
-        signupForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const username = document.getElementById('signupUsername').value.trim();
-            const phone = document.getElementById('signupPhone').value.trim();
-            const password = document.getElementById('signupPassword').value.trim();
-            const inviteCode = document.getElementById('inviteCode').value.trim();
-            
-            if (!username || !phone || !password) {
-                showMessage('error', 'Please fill in all required fields');
-                return;
-            }
-            
-            if (password.length < 6) {
-                showMessage('error', 'Password must be at least 6 characters');
-                return;
-            }
-            
-            await signup(username, phone, password, inviteCode);
-        });
-
-        // Forgot password link
-        document.getElementById('forgotPassword').addEventListener('click', (e) => {
-            e.preventDefault();
-            showMessage('info', 'Please contact support to reset your password');
-        });
-
-        // Initialize animations and effects
-        document.addEventListener('DOMContentLoaded', () => {
-            createBubbles();
-            createParticles();
-            checkForReferral();
-            
-            // Add hover effect to container
-            const container = document.querySelector('.container');
-            container.addEventListener('mousemove', (e) => {
-                const x = e.clientX - container.getBoundingClientRect().left;
-                const y = e.clientY - container.getBoundingClientRect().top;
-                
-                container.style.transform = `perspective(1000px) rotateX(${(y - container.offsetHeight/2) / 20}deg) rotateY(${(x - container.offsetWidth/2) / 20}deg)`;
+            inviterSnapshot.forEach((childSnapshot) => {
+              inviterKey = childSnapshot.key;
+              return true; // Break the loop
             });
             
-            container.addEventListener('mouseleave', () => {
-                container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-            });
+            if (inviterKey) {
+              // Add referral record
+              const referralData = {
+                username: newUsername,
+                joinedAt: firebase.database.ServerValue.TIMESTAMP,
+                status: 'pending' // Will be updated to 'active' when user makes first investment
+              };
+              
+              await database.ref(`referrals/${mapKey}/${inviterKey}`).push(referralData);
+            }
+          }
+        } catch (error) {
+          console.error("Error processing referral:", error);
+        }
+      }
+
+      // Form event listeners
+      loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const phone = document.getElementById("loginPhone").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+
+        if (!phone || !password) {
+          showMessage("error", "Please fill in all fields");
+          return;
+        }
+
+        await login(phone, password);
+      });
+
+      signupForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const username = document.getElementById("signupUsername").value.trim();
+        const phone = document.getElementById("signupPhone").value.trim();
+        const password = document.getElementById("signupPassword").value.trim();
+        const inviteCode = document.getElementById("inviteCode").value.trim();
+
+        if (!username || !phone || !password) {
+          showMessage("error", "Please fill in all required fields");
+          return;
+        }
+
+        if (password.length < 6) {
+          showMessage("error", "Password must be at least 6 characters");
+          return;
+        }
+
+        await signup(username, phone, password, inviteCode);
+      });
+
+      // Forgot password link
+      document
+        .getElementById("forgotPassword")
+        .addEventListener("click", (e) => {
+          e.preventDefault();
+          showMessage("info", "Please contact support to reset your password");
         });
 
-        // Install App Prompt Logic
-        let deferredPrompt;
-        const installPopup = document.getElementById('installAppPopup');
-        const installBtn = document.getElementById('installAppBtn');
-        const closeBtn = document.getElementById('closeInstallPopup');
-        
-        // Show install prompt when available
-        window.addEventListener('beforeinstallprompt', (e) => {
-            // Prevent the mini-infobar from appearing on mobile
-            e.preventDefault();
-            // Stash the event so it can be triggered later
-            deferredPrompt = e;
-            // Show the install popup
-            setTimeout(() => {
-                installPopup.style.display = 'flex';
-            }, 5000); // Show after 5 seconds
+      // Initialize animations and effects
+      document.addEventListener("DOMContentLoaded", () => {
+        createBubbles();
+        createParticles();
+        checkReferralCode();
+
+        // Add hover effect to container
+        const container = document.querySelector(".container");
+        container.addEventListener("mousemove", (e) => {
+          const x = e.clientX - container.getBoundingClientRect().left;
+          const y = e.clientY - container.getBoundingClientRect().top;
+
+          container.style.transform = `perspective(1000px) rotateX(${
+            (y - container.offsetHeight / 2) / 20
+          }deg) rotateY(${(x - container.offsetWidth / 2) / 20}deg)`;
         });
-        
-        // Install button handler
-        installBtn.addEventListener('click', async () => {
-            if (deferredPrompt) {
-                // Show the install prompt
-                deferredPrompt.prompt();
-                // Wait for the user to respond to the prompt
-                const { outcome } = await deferredPrompt.userChoice;
-                // Optionally, send analytics event with outcome of user choice
-                console.log(`User response to the install prompt: ${outcome}`);
-                // We've used the prompt, and can't use it again, throw it away
-                deferredPrompt = null;
-                // Hide the install popup
-                installPopup.style.display = 'none';
-            }
+
+        container.addEventListener("mouseleave", () => {
+          container.style.transform =
+            "perspective(1000px) rotateX(0) rotateY(0)";
         });
-        
-        // Close button handler
-        closeBtn.addEventListener('click', () => {
-            installPopup.style.display = 'none';
-        });
-        
-        // Track successful installation
-        window.addEventListener('appinstalled', () => {
-            // Hide the install popup
-            installPopup.style.display = 'none';
-            // Optionally, send analytics event to indicate successful install
-            console.log('PWA was installed');
-        });
+      });
     </script>
-</body>
+    <script>
+      // Install App Prompt Logic
+      let deferredPrompt;
+      const installPopup = document.getElementById("installAppPopup");
+      const installBtn = document.getElementById("installAppBtn");
+      const closeBtn = document.getElementById("closeInstallPopup");
+
+      // Show install prompt when available
+      window.addEventListener("beforeinstallprompt", (e) => {
+        // Prevent the mini-infobar from appearing on mobile
+        e.preventDefault();
+        // Stash the event so it can be triggered later
+        deferredPrompt = e;
+        // Show the install popup
+        setTimeout(() => {
+          installPopup.style.display = "flex";
+        }, 5000); // Show after 5 seconds
+      });
+
+      // Install button handler
+      installBtn.addEventListener("click", async () => {
+        if (deferredPrompt) {
+          // Show the install prompt
+          deferredPrompt.prompt();
+          // Wait for the user to respond to the prompt
+          const { outcome } = await deferredPrompt.userChoice;
+          // Optionally, send analytics event with outcome of user choice
+          console.log(`User response to the install prompt: ${outcome}`);
+          // We've used the prompt, and can't use it again, throw it away
+          deferredPrompt = null;
+          // Hide the install popup
+          installPopup.style.display = "none";
+        }
+      });
+
+      // Close button handler
+      closeBtn.addEventListener("click", () => {
+        installPopup.style.display = "none";
+      });
+
+      // Track successful installation
+      window.addEventListener("appinstalled", () => {
+        // Hide the install popup
+        installPopup.style.display = "none";
+        // Optionally, send analytics event to indicate successful install
+        console.log("PWA was installed");
+      });
+    </script>
+  </body>
 </html>
