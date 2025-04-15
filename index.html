@@ -5,44 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Facebook Investment - Join Us</title>
     <!-- Favicon and App Icons -->
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4361ee">
-<meta name="msapplication-TileColor" content="#4361ee">
-<meta name="theme-color" content="#4361ee">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4361ee">
+    <meta name="msapplication-TileColor" content="#4361ee">
+    <meta name="theme-color" content="#4361ee">
 
-<!-- Primary Meta Tags -->
-<meta name="title" content="Facebook Investment - Build Your Financial Future">
-<meta name="description" content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income.">
-<meta name="keywords" content="investment, earn money, passive income, financial growth, money making, facebook investment, wealth building">
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Facebook Investment - Build Your Financial Future">
+    <meta name="description" content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income.">
+    <meta name="keywords" content="investment, earn money, passive income, financial growth, money making, facebook investment, wealth building">
 
-<!-- Open Graph / Facebook Meta Tags -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://yourwebsite.com/">
-<meta property="og:title" content="Facebook Investment - Build Your Financial Future">
-<meta property="og:description" content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income.">
-<meta property="og:image" content="https://yourwebsite.com/images/meta-image.jpg">
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com/">
+    <meta property="og:title" content="Facebook Investment - Build Your Financial Future">
+    <meta property="og:description" content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income.">
+    <meta property="og:image" content="https://yourwebsite.com/images/meta-image.jpg">
 
-<!-- Twitter Meta Tags -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://yourwebsite.com/">
-<meta property="twitter:title" content="Facebook Investment - Build Your Financial Future">
-<meta property="twitter:description" content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income.">
-<meta property="twitter:image" content="https://yourwebsite.com/images/meta-image.jpg">
+    <!-- Twitter Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourwebsite.com/">
+    <meta property="twitter:title" content="Facebook Investment - Build Your Financial Future">
+    <meta property="twitter:description" content="Join Facebook Investment platform to grow your money with daily returns. Invest in secure plans and earn passive income.">
+    <meta property="twitter:image" content="https://yourwebsite.com/images/meta-image.jpg">
 
-<!-- Canonical URL -->
-<link rel="canonical" href="https://yourwebsite.com/" />
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://yourwebsite.com/" />
 
-<!-- Mobile Specific Meta -->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="mobile-web-app-capable" content="yes">
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
 
-<!-- PWA Manifest -->
-<link rel="manifest" href="/manifest.json">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -302,21 +302,22 @@
         }
 
         .message {
-            padding: 10px;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 20px;
             border-radius: 8px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 14px;
-            display: none;
-        }
-
-        .error {
             background-color: rgba(247, 37, 133, 0.2);
             color: #ff6b9d;
             border: 1px solid rgba(247, 37, 133, 0.3);
+            z-index: 1000;
+            display: none;
+            max-width: 90%;
+            text-align: center;
         }
 
-        .success {
+        .message.success {
             background-color: rgba(76, 201, 240, 0.2);
             color: #8bdbf5;
             border: 1px solid rgba(76, 201, 240, 0.3);
@@ -421,153 +422,166 @@
         }
 
         /* Install App Popup Styles */
-    .install-popup {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 9999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        animation: fadeIn 0.3s ease-out;
-    }
-    
-    .install-popup-content {
-        background: white;
-        border-radius: 15px;
-        width: 90%;
-        max-width: 400px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        transform: translateY(20px);
-        animation: slideUp 0.4s ease-out forwards;
-    }
-    
-    .install-popup-header {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        padding: 20px;
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-    
-    .install-popup-header i {
-        font-size: 24px;
-        margin-right: 15px;
-    }
-    
-    .install-popup-header h3 {
-        margin: 0;
-        font-size: 1.2rem;
-        flex: 1;
-    }
-    
-    .install-close-btn {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 24px;
-        cursor: pointer;
-        padding: 0;
-        margin: 0;
-        line-height: 1;
-    }
-    
-    .install-popup-body {
-        padding: 20px;
-        color: var(--text-dark);
-    }
-    
-    .install-popup-body p {
-        margin-bottom: 20px;
-        line-height: 1.5;
-    }
-    
-    .install-steps {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .install-step {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-    
-    .step-number {
-        background: var(--accent);
-        color: white;
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        font-size: 0.9rem;
-        flex-shrink: 0;
-    }
-    
-    .install-popup-footer {
-        padding: 15px 20px;
-        background: #f8f9fa;
-        text-align: center;
-    }
-    
-    .install-btn {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        border: none;
-        border-radius: 8px;
-        padding: 12px 20px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        transition: all 0.3s ease;
-    }
-    
-    .install-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
-    }
-    
-    .install-btn:active {
-        transform: translateY(0);
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-    
-    @keyframes slideUp {
-        from { transform: translateY(20px); }
-        to { transform: translateY(0); }
-    }
-    
-    @media (max-width: 480px) {
+        .install-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
         .install-popup-content {
-            width: 95%;
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            animation: slideUp 0.4s ease-out forwards;
         }
         
         .install-popup-header {
-            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .install-popup-header i {
+            font-size: 24px;
+            margin-right: 15px;
         }
         
         .install-popup-header h3 {
-            font-size: 1.1rem;
+            margin: 0;
+            font-size: 1.2rem;
+            flex: 1;
         }
-    }
+        
+        .install-close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            line-height: 1;
+        }
+        
+        .install-popup-body {
+            padding: 20px;
+            color: var(--text-dark);
+        }
+        
+        .install-popup-body p {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        
+        .install-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .install-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .step-number {
+            background: var(--accent);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        
+        .install-popup-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .install-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .install-btn:active {
+            transform: translateY(0);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); }
+            to { transform: translateY(0); }
+        }
+        
+        @media (max-width: 480px) {
+            .install-popup-content {
+                width: 95%;
+            }
+            
+            .install-popup-header {
+                padding: 15px;
+            }
+            
+            .install-popup-header h3 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Referral notice */
+        .referral-notice {
+            background: rgba(76, 201, 240, 0.2);
+            border: 1px solid rgba(76, 201, 240, 0.3);
+            color: #8bdbf5;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 14px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -595,6 +609,11 @@
         
         <!-- Message container -->
         <div id="message" class="message" style="display: none;"></div>
+
+        <!-- Referral notice -->
+        <div id="referralNotice" class="referral-notice" style="display: none;">
+            You're joining with a referral from <strong id="referrerName"></strong>! Both of you will earn rewards when you make your first investment.
+        </div>
         
         <!-- Forms container -->
         <div class="form-container">
@@ -640,39 +659,38 @@
             </form>
         </div>
         
-
         <!-- Install App Popup -->
-<div id="installAppPopup" class="install-popup" style="display: none;">
-    <div class="install-popup-content">
-        <div class="install-popup-header">
-            <i class="fas fa-download"></i>
-            <h3>Install Facebook Investment</h3>
-            <button id="closeInstallPopup" class="install-close-btn">&times;</button>
-        </div>
-        <div class="install-popup-body">
-            <p>Add Facebook Investment to your home screen for quick access and a better experience.</p>
-            <div class="install-steps">
-                <div class="install-step">
-                    <div class="step-number">1</div>
-                    <p>Tap the <i class="fas fa-share"></i> Share button</p>
+        <div id="installAppPopup" class="install-popup" style="display: none;">
+            <div class="install-popup-content">
+                <div class="install-popup-header">
+                    <i class="fas fa-download"></i>
+                    <h3>Install Facebook Investment</h3>
+                    <button id="closeInstallPopup" class="install-close-btn">&times;</button>
                 </div>
-                <div class="install-step">
-                    <div class="step-number">2</div>
-                    <p>Select "Add to Home Screen"</p>
+                <div class="install-popup-body">
+                    <p>Add Facebook Investment to your home screen for quick access and a better experience.</p>
+                    <div class="install-steps">
+                        <div class="install-step">
+                            <div class="step-number">1</div>
+                            <p>Tap the <i class="fas fa-share"></i> Share button</p>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">2</div>
+                            <p>Select "Add to Home Screen"</p>
+                        </div>
+                        <div class="install-step">
+                            <div class="step-number">3</div>
+                            <p>Confirm by tapping "Add"</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="install-step">
-                    <div class="step-number">3</div>
-                    <p>Confirm by tapping "Add"</p>
+                <div class="install-popup-footer">
+                    <button id="installAppBtn" class="install-btn">
+                        <i class="fas fa-plus-circle"></i> Install Now
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="install-popup-footer">
-            <button id="installAppBtn" class="install-btn">
-                <i class="fas fa-plus-circle"></i> Install Now
-            </button>
-        </div>
-    </div>
-</div>
 
         <!-- Footer -->
         <div class="footer animate__animated animate__fadeIn animate__delay-1s">
@@ -683,14 +701,14 @@
     <script>
         // Firebase configuration
         const firebaseConfig = {
-        apiKey: "AIzaSyCgOvIkDCcS3DFrt5f6Y7pYmjCoHIfDF9U",
-        authDomain: "moniebase-b4b4d.firebaseapp.com",
-        projectId: "moniebase-b4b4d",
-        storageBucket: "moniebase-b4b4d.appspot.com",
-        messagingSenderId: "1009678808253",
-        appId: "1:1009678808253:android:ff94e94c52bad2db7973d4",
-        databaseURL: "https://moniebase-b4b4d-default-rtdb.firebaseio.com/",
-      };
+            apiKey: "AIzaSyCgOvIkDCcS3DFrt5f6Y7pYmjCoHIfDF9U",
+            authDomain: "moniebase-b4b4d.firebaseapp.com",
+            projectId: "moniebase-b4b4d",
+            storageBucket: "moniebase-b4b4d.appspot.com",
+            messagingSenderId: "1009678808253",
+            appId: "1:1009678808253:android:ff94e94c52bad2db7973d4",
+            databaseURL: "https://moniebase-b4b4d-default-rtdb.firebaseio.com/",
+        };
 
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
@@ -708,6 +726,34 @@
         const tabs = document.querySelectorAll('.tab');
         const forms = document.querySelectorAll('.form');
         const floatingBubbles = document.querySelector('.floating-bubbles');
+        const referralNotice = document.getElementById('referralNotice');
+        const referrerNameElement = document.getElementById('referrerName');
+        const inviteCodeInput = document.getElementById('inviteCode');
+
+        // Check for referral code in URL
+        function checkForReferral() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const refCode = urlParams.get('ref');
+            
+            if (refCode) {
+                // Check if referrer exists
+                database.ref(`investment/${mapKey}`).orderByChild('username').equalTo(refCode).once('value')
+                    .then(snapshot => {
+                        if (snapshot.exists()) {
+                            // Show referral notice and pre-fill invite code
+                            snapshot.forEach(childSnapshot => {
+                                const referrer = childSnapshot.val();
+                                referrerNameElement.textContent = referrer.username;
+                                referralNotice.style.display = 'block';
+                                inviteCodeInput.value = refCode;
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error checking referrer:', error);
+                    });
+            }
+        }
 
         // Create bubbles
         function createBubbles() {
@@ -886,6 +932,27 @@
                     balance: 0.00,
                     createdAt: firebase.database.ServerValue.TIMESTAMP
                 });
+
+                // If there was an invite code, create a referral record
+                if (inviteCode) {
+                    // Find the referrer by username
+                    const referrerSnapshot = await database.ref(`investment/${mapKey}`).orderByChild('username').equalTo(inviteCode).once('value');
+                    
+                    if (referrerSnapshot.exists()) {
+                        referrerSnapshot.forEach(referrerChild => {
+                            const referrerKey = referrerChild.key;
+                            
+                            // Create referral record
+                            database.ref(`referrals/${mapKey}/${referrerKey}`).push().set({
+                                username: username,
+                                phoneNumber: phone,
+                                joinedAt: firebase.database.ServerValue.TIMESTAMP,
+                                status: 'pending', // Will change to 'active' when user makes first investment
+                                rewardAmount: 300 // ₦300 reward
+                            });
+                        });
+                    }
+                }
                 
                 // Store user data in session storage
                 sessionStorage.setItem('currentUser', JSON.stringify({
@@ -957,6 +1024,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             createBubbles();
             createParticles();
+            checkForReferral();
             
             // Add hover effect to container
             const container = document.querySelector('.container');
@@ -971,8 +1039,7 @@
                 container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
             });
         });
-    </script>
-    <script>
+
         // Install App Prompt Logic
         let deferredPrompt;
         const installPopup = document.getElementById('installAppPopup');
