@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WealthBuild - Transaction History</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <style>
+      :root {
+        --primary: #4361ee;
+        --secondary: #3f37c9;
+        --accent: #4895ef;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --success: #4cc9f0;
+        --warning: #f72585;
+        --danger: #f72585;
+        --card-bg: #ffffff;
+        --text-light: #f8f9fa;
+        --text-dark: #343a40;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f5f7fa;
+        color: var(--text-dark);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .hero {
+        position: relative;
+        height: 220px;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80")
+            no-repeat center center;
+        background-size: cover;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        border-radius: 0 0 20px 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .user-info {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 8px 15px;
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+      }
+
+      .user-info i {
+        margin-right: 8px;
+        color: var(--accent);
+      }
+
+      .logout-btn {
+        margin-left: 10px;
+        background: none;
+        border: none;
+        color: var(--light);
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .balance-section {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .balance-section h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        font-weight: 400;
+        opacity: 0.9;
+      }
+
+      .balance-amount {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .container {
+        padding: 20px;
+        width: 90%;
+        max-width: 1000px;
+        margin: 30px auto;
+      }
+
+      .section-title {
+        margin-bottom: 25px;
+        font-size: 1.5rem;
+        color: var(--dark);
+        position: relative;
+        padding-bottom: 10px;
+        text-align: center;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 3px;
+      }
+
+      .tabs {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 25px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .tab {
+        padding: 12px 25px;
+        cursor: pointer;
+        font-weight: 500;
+        color: #6c757d;
+        position: relative;
+        transition: var(--transition);
+      }
+
+      .tab.active {
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .tab.active::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--primary);
+        border-radius: 3px 3px 0 0;
+      }
+
+      .tab:hover:not(.active) {
+        color: var(--secondary);
+      }
+
+      .history-container {
+        background: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        margin-bottom: 80px;
+      }
+
+      .history-header {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        padding: 15px 20px;
+        background: var(--primary);
+        color: white;
+        font-weight: 600;
+      }
+
+      .history-item {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        padding: 15px 20px;
+        border-bottom: 1px solid #f0f0f0;
+        transition: var(--transition);
+      }
+
+      .history-item:last-child {
+        border-bottom: none;
+      }
+
+      .history-item:hover {
+        background: #f8f9fa;
+      }
+
+      .history-date {
+        color: #6c757d;
+        font-size: 0.9rem;
+      }
+
+      .history-amount {
+        font-weight: 600;
+      }
+
+      .history-status {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      .status-pending {
+        background-color: rgba(255, 193, 7, 0.2);
+        color: #ffc107;
+      }
+
+      .status-completed {
+        background-color: rgba(40, 167, 69, 0.2);
+        color: #28a745;
+      }
+
+      .status-failed {
+        background-color: rgba(220, 53, 69, 0.2);
+        color: #dc3545;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 50px 20px;
+        color: #6c757d;
+      }
+
+      .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #dee2e6;
+      }
+
+      .empty-state h3 {
+        margin-bottom: 10px;
+        color: #6c757d;
+      }
+
+      .empty-state p {
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      .message {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px 20px;
+        border-radius: 8px;
+        background-color: rgba(247, 37, 133, 0.2);
+        color: #ff6b9d;
+        border: 1px solid rgba(247, 37, 133, 0.3);
+        z-index: 1000;
+        display: none;
+        max-width: 90%;
+        text-align: center;
+      }
+
+      .message.success {
+        background-color: rgba(76, 201, 240, 0.2);
+        color: #8bdbf5;
+        border: 1px solid rgba(76, 201, 240, 0.3);
+      }
+
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        display: flex;
+        justify-content: space-around;
+        padding: 12px 0;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+
+      .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #6c757d;
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: var(--transition);
+      }
+
+      .nav-item i {
+        font-size: 1.2rem;
+        margin-bottom: 5px;
+      }
+
+      .nav-item.active {
+        color: var(--primary);
+      }
+
+      .nav-item:hover {
+        color: var(--primary);
+      }
+
+      /* Loading spinner */
+      .spinner-container {
+        display: flex;
+        justify-content: center;
+        padding: 30px;
+      }
+
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: var(--primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .hero {
+          height: 200px;
+        }
+
+        .balance-amount {
+          font-size: 1.8rem;
+        }
+
+        .container {
+          width: 95%;
+          padding: 15px;
+        }
+
+        .history-header,
+        .history-item {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .history-header span:nth-child(4),
+        .history-header span:nth-child(5),
+        .history-item div:nth-child(4),
+        .history-item div:nth-child(5) {
+          display: none;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero {
+          height: 180px;
+        }
+
+        .user-info {
+          top: 15px;
+          right: 15px;
+          padding: 6px 12px;
+          font-size: 0.9rem;
+        }
+
+        .balance-section h2 {
+          font-size: 1rem;
+        }
+
+        .balance-amount {
+          font-size: 1.6rem;
+        }
+
+        .section-title {
+          font-size: 1.3rem;
+          margin-bottom: 20px;
+        }
+
+        .tabs {
+          flex-wrap: wrap;
+        }
+
+        .tab {
+          padding: 8px 15px;
+          font-size: 0.9rem;
+        }
+
+        .history-header,
+        .history-item {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .history-header span:nth-child(3),
+        .history-item div:nth-child(3) {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Message container -->
+    <div id="message" class="message"></div>
+
+    <div class="hero">
+      <div class="user-info">
+        <i class="fas fa-user-circle"></i>
+        <span id="username">Loading...</span>
+        <button class="logout-btn" id="logoutBtn">Logout</button>
+      </div>
+
+      <div class="balance-section">
+        <h2>Available Balance</h2>
+        <div>
+          <span class="balance-amount">₦<span id="balance">0.00</span></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2 class="section-title">Transaction History</h2>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="withdrawals">Withdrawals</div>
+        <div class="tab" data-tab="deposits">Deposits</div>
+        <div class="tab" data-tab="investments">Investments</div>
+      </div>
+
+      <div class="history-container" id="withdrawalsTab">
+        <div class="history-header">
+          <span>Date</span>
+          <span>Amount</span>
+          <span>Bank</span>
+          <span>Account</span>
+          <span>Status</span>
+        </div>
+
+        <div id="withdrawalsList">
+          <div class="spinner-container">
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="history-container" id="depositsTab" style="display: none">
+        <div class="history-header">
+          <span>Date</span>
+          <span>Amount</span>
+          <span>Method</span>
+          <span>Reference</span>
+          <span>Status</span>
+        </div>
+
+        <div id="depositsList">
+          <div class="empty-state">
+            <i class="fas fa-money-bill-wave"></i>
+            <h3>No Deposit History</h3>
+            <p>
+              You haven't made any deposits yet. Click the Deposit button below
+              to add funds to your account.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="history-container" id="investmentsTab" style="display: none">
+        <div class="history-header">
+          <span>Date</span>
+          <span>Plan</span>
+          <span>Amount</span>
+          <span>Daily Income</span>
+          <span>Status</span>
+        </div>
+
+        <div id="investmentsList">
+          <div class="empty-state">
+            <i class="fas fa-chart-line"></i>
+            <h3>No Investment History</h3>
+            <p>
+              You haven't made any investments yet. Browse our investment plans
+              to get started.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <a href="home.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>Home</span>
+      </a>
+      <a href="deposit.html" class="nav-item">
+        <i class="fas fa-money-bill-wave"></i>
+        <span>Deposit</span>
+      </a>
+      <a href="withdraw.html" class="nav-item">
+        <i class="fas fa-wallet"></i>
+        <span>Withdraw</span>
+      </a>
+      <a href="invite.html" class="nav-item">
+        <i class="fas fa-user-plus"></i>
+        <span>Invite</span>
+      </a>
+      <a href="history.html" class="nav-item active">
+        <i class="fas fa-history"></i>
+        <span>History</span>
+      </a>
+    </div>
+
+    <script>
+      // Firebase configuration (must match auth.html)
+      const firebaseConfig = {
+        apiKey: "AIzaSyCgOvIkDCcS3DFrt5f6Y7pYmjCoHIfDF9U",
+        authDomain: "moniebase-b4b4d.firebaseapp.com",
+        projectId: "moniebase-b4b4d",
+        storageBucket: "moniebase-b4b4d.appspot.com",
+        messagingSenderId: "1009678808253",
+        appId: "1:1009678808253:android:ff94e94c52bad2db7973d4",
+        databaseURL: "https://moniebase-b4b4d-default-rtdb.firebaseio.com/",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+      const mapKey = "danreg";
+
+      // DOM elements
+      const usernameElement = document.getElementById("username");
+      const balanceElement = document.getElementById("balance");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const messageDiv = document.getElementById("message");
+      const tabs = document.querySelectorAll(".tab");
+      const withdrawalsTab = document.getElementById("withdrawalsTab");
+      const depositsTab = document.getElementById("depositsTab");
+      const investmentsTab = document.getElementById("investmentsTab");
+      const withdrawalsList = document.getElementById("withdrawalsList");
+      const depositsList = document.getElementById("depositsList");
+      const investmentsList = document.getElementById("investmentsList");
+
+      // User data
+      let currentUser = null;
+      let userKey = null;
+
+      // Show message
+      function showMessage(type, text, duration = 3000) {
+        messageDiv.textContent = text;
+        messageDiv.className = "message " + type;
+        messageDiv.style.display = "block";
+
+        setTimeout(() => {
+          messageDiv.style.display = "none";
+        }, duration);
+      }
+
+      // Format currency
+      function formatCurrency(amount) {
+        return amount.toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+      }
+
+      // Format date
+      function formatDate(timestamp) {
+        const date = new Date(timestamp);
+        return date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      // Load user data
+      function loadUserData() {
+        const sessionUser = sessionStorage.getItem("currentUser");
+        if (!sessionUser) {
+          window.location.href = "index.html";
+          return;
+        }
+
+        currentUser = JSON.parse(sessionUser);
+        usernameElement.textContent = currentUser.username;
+        balanceElement.textContent = formatCurrency(currentUser.balance || 0);
+
+        // Find user in database to get the key
+        database
+          .ref(`investment/${mapKey}`)
+          .orderByChild("phoneNumber")
+          .equalTo(currentUser.phoneNumber)
+          .once("value")
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              snapshot.forEach((childSnapshot) => {
+                userKey = childSnapshot.key;
+                currentUser = childSnapshot.val();
+                currentUser.key = userKey;
+
+                // Update balance display
+                balanceElement.textContent = formatCurrency(
+                  currentUser.balance || 0
+                );
+
+                // Load withdrawal history
+                loadWithdrawalHistory();
+              });
+            } else {
+              showMessage("error", "User not found in database");
+              setTimeout(() => {
+                window.location.href = "index.html";
+              }, 2000);
+            }
+          })
+          .catch((error) => {
+            console.error("Error loading user data:", error);
+            showMessage("error", "Error loading user data");
+          });
+      }
+
+      // Load withdrawal history
+      function loadWithdrawalHistory() {
+        if (!userKey) return;
+
+        database
+          .ref(`withdrawals/${mapKey}/${userKey}`)
+          .orderByChild("date")
+          .once("value")
+          .then((snapshot) => {
+            withdrawalsList.innerHTML = "";
+
+            if (!snapshot.exists()) {
+              withdrawalsList.innerHTML = `
+                <div class="empty-state">
+                  <i class="fas fa-wallet"></i>
+                  <h3>No Withdrawal History</h3>
+                  <p>You haven't made any withdrawals yet. Your withdrawal history will appear here.</p>
+                </div>
+              `;
+              return;
+            }
+
+            const withdrawals = [];
+            snapshot.forEach((childSnapshot) => {
+              const withdrawal = childSnapshot.val();
+              withdrawal.key = childSnapshot.key;
+              withdrawals.push(withdrawal);
+            });
+
+            // Sort by date (newest first)
+            withdrawals.sort((a, b) => b.date - a.date);
+
+            // Display withdrawals
+            withdrawals.forEach((withdrawal) => {
+              const statusClass =
+                withdrawal.status === "completed"
+                  ? "status-completed"
+                  : withdrawal.status === "failed"
+                  ? "status-failed"
+                  : "status-pending";
+
+              const item = document.createElement("div");
+              item.className = "history-item";
+              item.innerHTML = `
+                <div class="history-date">${formatDate(withdrawal.date)}</div>
+                <div class="history-amount">₦${formatCurrency(
+                  withdrawal.amount
+                )}</div>
+                <div>${withdrawal.bankName}</div>
+                <div>${withdrawal.accountNumber}</div>
+                <div class="history-status ${statusClass}">${
+                withdrawal.status
+              }</div>
+              `;
+              withdrawalsList.appendChild(item);
+            });
+          })
+          .catch((error) => {
+            console.error("Error loading withdrawal history:", error);
+            withdrawalsList.innerHTML = `
+              <div class="empty-state">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Error Loading History</h3>
+                <p>There was an error loading your withdrawal history. Please try again later.</p>
+              </div>
+            `;
+          });
+      }
+
+      // Load deposit history (placeholder - implement similar to withdrawals)
+      function loadDepositHistory() {
+        depositsList.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-money-bill-wave"></i>
+            <h3>No Deposit History</h3>
+            <p>You haven't made any deposits yet. Click the Deposit button below to add funds to your account.</p>
+          </div>
+        `;
+      }
+
+      // Load investment history (placeholder - implement similar to withdrawals)
+      function loadInvestmentHistory() {
+        investmentsList.innerHTML = `
+          <div class="empty-state">
+            <i class="fas fa-chart-line"></i>
+            <h3>No Investment History</h3>
+            <p>You haven't made any investments yet. Browse our investment plans to get started.</p>
+          </div>
+        `;
+      }
+
+      // Switch tabs
+      function switchTab(tabName) {
+        // Update tab UI
+        tabs.forEach((tab) => {
+          if (tab.dataset.tab === tabName) {
+            tab.classList.add("active");
+          } else {
+            tab.classList.remove("active");
+          }
+        });
+
+        // Show the selected tab content
+        if (tabName === "withdrawals") {
+          withdrawalsTab.style.display = "block";
+          depositsTab.style.display = "none";
+          investmentsTab.style.display = "none";
+          loadWithdrawalHistory();
+        } else if (tabName === "deposits") {
+          withdrawalsTab.style.display = "none";
+          depositsTab.style.display = "block";
+          investmentsTab.style.display = "none";
+          loadDepositHistory();
+        } else if (tabName === "investments") {
+          withdrawalsTab.style.display = "none";
+          depositsTab.style.display = "none";
+          investmentsTab.style.display = "block";
+          loadInvestmentHistory();
+        }
+      }
+
+      // Logout
+      function logout() {
+        sessionStorage.removeItem("currentUser");
+        window.location.href = "index.html";
+      }
+
+      // Event listeners
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          switchTab(tab.dataset.tab);
+        });
+      });
+
+      logoutBtn.addEventListener("click", logout);
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        loadUserData();
+      });
+    </script>
+  </body>
+</html>
