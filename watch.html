@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Itel ISW-011 Smartwatch Notification Sender</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+      .status {
+        margin: 20px 0;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+      .connected {
+        background-color: #d4edda;
+        color: #155724;
+      }
+      .disconnected {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+      .connecting {
+        background-color: #fff3cd;
+        color: #856404;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        margin-top: 10px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      button:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+      }
+      .log {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f8f9fa;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        height: 150px;
+        overflow-y: auto;
+      }
+      .log p {
+        margin: 5px 0;
+        font-family: monospace;
+      }
+      .device-info {
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #e2f3fd;
+        border-radius: 5px;
+        border: 1px solid #b8daff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Itel ISW-011 Smartwatch Notification Sender</h1>
+
+      <div class="device-info">
+        <p><strong>Target Device:</strong> itel ISW-011</p>
+      </div>
+
+      <div id="statusIndicator" class="status disconnected">
+        Not connected to any device
+      </div>
+
+      <div class="form-group">
+        <button id="connectBtn">Connect to Smartwatch</button>
+      </div>
+
+      <div class="form-group">
+        <label for="messageInput">Message:</label>
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Type your message here"
+          disabled
+        />
+      </div>
+
+      <button id="sendBtn" disabled>Send Notification</button>
+
+      <div class="log" id="logContainer">
+        <p>Log messages will appear here...</p>
+      </div>
+    </div>
+
+    <script>
+      // DOM Elements
+      const connectBtn = document.getElementById("connectBtn");
+      const sendBtn = document.getElementById("sendBtn");
+      const messageInput = document.getElementById("messageInput");
+      const statusIndicator = document.getElementById("statusIndicator");
+      const logContainer = document.getElementById("logContainer");
+
+      // Bluetooth device variables
+      let bluetoothDevice = null;
+      let notificationCharacteristic = null;
+
+      // Specific UUIDs for itel ISW-011
+      // Note: These are common UUIDs that might work with your watch
+      // If not working, you may need to discover the actual UUIDs using a BLE scanner app
+      const SERVICES = {
+        ALERT_NOTIFICATION: "00001811-0000-1000-8000-00805f9b34fb",
+        IMMEDIATE_ALERT: "00001802-0000-1000-8000-00805f9b34fb",
+        DEVICE_INFO: "0000180a-0000-1000-8000-00805f9b34fb",
+        BATTERY: "0000180f-0000-1000-8000-00805f9b34fb",
+        USER_DATA: "0000181c-0000-1000-8000-00805f9b34fb",
+      };
+
+      const CHARACTERISTICS = {
+        NEW_ALERT: "00002a46-0000-1000-8000-00805f9b34fb",
+        ALERT_NOTIFICATION_CONTROL_POINT:
+          "00002a44-0000-1000-8000-00805f9b34fb",
+        ALERT_LEVEL: "00002a06-0000-1000-8000-00805f9b34fb",
+      };
+
+      // Log function
+      function log(message) {
+        const logEntry = document.createElement("p");
+        logEntry.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+        logContainer.appendChild(logEntry);
+        logContainer.scrollTop = logContainer.scrollHeight;
+      }
+
+      // Update UI status
+      function updateStatus(status, message) {
+        statusIndicator.className = `status ${status}`;
+        statusIndicator.textContent = message;
+      }
+
+      // Connect to Bluetooth device
+      connectBtn.addEventListener("click", async () => {
+        if (bluetoothDevice && bluetoothDevice.gatt.connected) {
+          // Disconnect if already connected
+          try {
+            log("Disconnecting...");
+            await bluetoothDevice.gatt.disconnect();
+          } catch (error) {
+            log(`Error during disconnect: ${error.message}`);
+          }
+          return;
+        }
+
+        try {
+          log("Requesting Bluetooth device...");
+          updateStatus("connecting", "Connecting...");
+
+          // Check if Web Bluetooth is supported
+          if (!navigator.bluetooth) {
+            throw new Error(
+              "Web Bluetooth API is not supported in your browser"
+            );
+          }
+
+          // Request device with all needed services
+          bluetoothDevice = await navigator.bluetooth.requestDevice({
+            filters: [
+              { namePrefix: "itel" },
+              { namePrefix: "ISW" },
+              { namePrefix: "ISW-011" },
+              // Add multiple filters to increase chance of finding the device
+            ],
+            optionalServices: [
+              SERVICES.ALERT_NOTIFICATION,
+              SERVICES.IMMEDIATE_ALERT,
+              SERVICES.DEVICE_INFO,
+              SERVICES.BATTERY,
+              SERVICES.USER_DATA,
+              // Adding common services that might be used by the watch
+            ],
+          });
+
+          log(`Device selected: ${bluetoothDevice.name}`);
+
+          // Add event listener for disconnection
+          bluetoothDevice.addEventListener(
+            "gattserverdisconnected",
+            onDisconnected
+          );
+
+          // Connect to GATT server
+          log("Connecting to GATT server...");
+          const server = await bluetoothDevice.gatt.connect();
+
+          // Try to get services and characteristics
+          try {
+            // First try Alert Notification Service
+            log("Attempting to use Alert Notification Service...");
+            const alertService = await server.getPrimaryService(
+              SERVICES.ALERT_NOTIFICATION
+            );
+            notificationCharacteristic = await alertService.getCharacteristic(
+              CHARACTERISTICS.NEW_ALERT
+            );
+            log("Alert Notification Service found and connected!");
+          } catch (alertServiceError) {
+            log(`Alert service not available: ${alertServiceError.message}`);
+
+            try {
+              // Fallback to Immediate Alert Service
+              log("Attempting to use Immediate Alert Service...");
+              const immediateAlertService = await server.getPrimaryService(
+                SERVICES.IMMEDIATE_ALERT
+              );
+              notificationCharacteristic =
+                await immediateAlertService.getCharacteristic(
+                  CHARACTERISTICS.ALERT_LEVEL
+                );
+              log("Immediate Alert Service found and connected!");
+            } catch (immediateAlertError) {
+              log(
+                `Immediate Alert service not available: ${immediateAlertError.message}`
+              );
+              throw new Error("Could not find compatible notification service");
+            }
+          }
+
+          // Get available services for debugging
+          log("Getting available services...");
+          const services = await server.getPrimaryServices();
+          services.forEach(async (service) => {
+            log(`Found service: ${service.uuid}`);
+            try {
+              const characteristics = await service.getCharacteristics();
+              characteristics.forEach((characteristic) => {
+                log(`  - Characteristic: ${characteristic.uuid}`);
+              });
+            } catch (e) {
+              log(`  - Could not read characteristics: ${e.message}`);
+            }
+          });
+
+          // Enable UI elements
+          messageInput.disabled = false;
+          sendBtn.disabled = false;
+          connectBtn.textContent = "Disconnect";
+
+          updateStatus("connected", `Connected to ${bluetoothDevice.name}`);
+          log("Connected and ready to send notifications!");
+        } catch (error) {
+          log(`Error: ${error.message}`);
+          updateStatus("disconnected", "Connection failed");
+          resetUI();
+        }
+      });
+
+      // Handle disconnection
+      function onDisconnected() {
+        log("Device disconnected");
+        updateStatus("disconnected", "Device disconnected");
+        resetUI();
+      }
+
+      // Reset UI to disconnected state
+      function resetUI() {
+        messageInput.disabled = true;
+        sendBtn.disabled = true;
+        connectBtn.textContent = "Connect to Smartwatch";
+        bluetoothDevice = null;
+        notificationCharacteristic = null;
+      }
+
+      // Send notification
+      sendBtn.addEventListener("click", async () => {
+        if (!notificationCharacteristic) {
+          log("No device connected");
+          return;
+        }
+
+        const message = messageInput.value.trim();
+        if (!message) {
+          log("Please enter a message");
+          return;
+        }
+
+        try {
+          log(`Sending message: "${message}"`);
+
+          // Check which characteristic we're using to determine how to format the message
+          const isAlertNotification =
+            notificationCharacteristic.uuid === CHARACTERISTICS.NEW_ALERT;
+
+          if (isAlertNotification) {
+            // Format for Alert Notification Service
+            const encoder = new TextEncoder();
+            const messageArray = encoder.encode(message);
+
+            // Create the data packet
+            const dataPacket = new Uint8Array(messageArray.length + 2);
+            dataPacket[0] = 1; // Category ID: 1 = Simple Alert
+            dataPacket[1] = 1; // Number of alerts: 1
+            dataPacket.set(messageArray, 2); // Message text
+
+            await notificationCharacteristic.writeValue(dataPacket);
+          } else {
+            // Format for Immediate Alert Service
+            const dataPacket = new Uint8Array([2]); // High alert level
+            await notificationCharacteristic.writeValue(dataPacket);
+          }
+
+          log("Message sent successfully!");
+          messageInput.value = "";
+        } catch (error) {
+          log(`Error sending message: ${error.message}`);
+        }
+      });
+
+      // Add additional debugging info
+      log("Page loaded. Ready to connect to itel ISW-011.");
+      log("Note: Make sure Bluetooth is enabled on your device.");
+      log("If you have trouble connecting, try the following:");
+      log("1. Ensure your smartwatch is nearby and powered on");
+      log("2. Make sure your browser supports Web Bluetooth API");
+      log("3. Some browsers only support Web Bluetooth on HTTPS pages");
+    </script>
+  </body>
+</html>
