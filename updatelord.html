@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Professional services with premium offerings for your needs"
+    />
+    <meta
+      name="keywords"
+      content="format, paying client, services, pricing, professional, celebrity"
+    />
+    <meta name="author" content="CELEBRITY KING" />
+    <title>PAYING CLIENT</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #4a00e0;
+        --secondary-color: #8e2de2;
+        --accent-color: #ff7e5f;
+        --text-color: #333;
+        --light-text: #f8f9fa;
+        --dark-bg: #1a1a2e;
+        --card-bg: #ffffff;
+        --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f8f9fa;
+        color: var(--text-color);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        height: 80vh;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://th.bing.com/th/id/OIP.gUmjzKdIrSx-DhZs9hLcqwHaEK?rs=1&pid=ImgDetMain")
+            no-repeat center center/cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: var(--light-text);
+        padding: 0 20px;
+        height: 500px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background: linear-gradient(
+          to right,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        opacity: 0.7;
+        z-index: -1;
+      }
+
+      .profile-container {
+        margin-bottom: 2rem;
+        animation: fadeInDown 1s ease;
+      }
+
+      .profile-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .profile-img:hover {
+        transform: scale(1.05);
+        border-color: var(--accent-color);
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        background: linear-gradient(to right, #fff, #f8f9fa);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: fadeIn 1.5s ease;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        animation: fadeInUp 1s ease;
+      }
+
+      /* Scrolling Gallery */
+      .gallery-section {
+        padding: 3rem 0;
+        background-color: var(--dark-bg);
+        color: var(--light-text);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2.5rem;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(
+          to right,
+          var(--primary-color),
+          var(--accent-color)
+        );
+        border-radius: 3px;
+      }
+
+      .scrolling-gallery {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        padding: 20px 0;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none; /* Firefox */
+      }
+
+      .scrolling-gallery::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+      }
+
+      .gallery-item {
+        flex: 0 0 auto;
+        width: 300px;
+        height: 200px;
+        margin: 0 15px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        color: white;
+        padding: 10px;
+        transform: translateY(100%);
+        transition: var(--transition);
+      }
+
+      .gallery-item:hover .gallery-caption {
+        transform: translateY(0);
+      }
+
+      /* Services Section */
+      .services-section {
+        padding: 5rem 2rem;
+        background-color: var(--light-text);
+      }
+
+      .services-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .service-card {
+        background-color: var(--card-bg);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+        position: relative;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: linear-gradient(
+          to bottom,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+      }
+
+      .service-content {
+        padding: 2rem;
+      }
+
+      .service-card h2 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+        font-size: 1.8rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      .service-card h2::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 50%;
+        height: 3px;
+        background-color: var(--accent-color);
+      }
+
+      .service-card h4 {
+        color: var(--secondary-color);
+        margin: 1rem 0;
+        font-size: 1.2rem;
+      }
+
+      .service-card ul {
+        list-style-type: none;
+        margin: 1rem 0;
+      }
+
+      .service-card ul li {
+        margin-bottom: 0.5rem;
+        position: relative;
+        padding-left: 25px;
+      }
+
+      .service-card ul li::before {
+        content: "\f00c";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        position: absolute;
+        left: 0;
+        color: var(--accent-color);
+      }
+
+      .price {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--primary-color);
+        margin: 1.5rem 0;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background: linear-gradient(
+          to right,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: var(--transition);
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        box-shadow: 0 5px 15px rgba(74, 0, 224, 0.3);
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(74, 0, 224, 0.4);
+        background: linear-gradient(
+          to right,
+          var(--secondary-color),
+          var(--primary-color)
+        );
+      }
+
+      .cta-button i {
+        margin-left: 8px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--dark-bg);
+        color: var(--light-text);
+        text-align: center;
+        padding: 2rem;
+        margin-top: 2rem;
+      }
+
+      .social-links {
+        margin: 1rem 0;
+      }
+
+      .social-links a {
+        color: var(--light-text);
+        margin: 0 10px;
+        font-size: 1.5rem;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        color: var(--accent-color);
+        transform: translateY(-3px);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .profile-img {
+          width: 120px;
+          height: 120px;
+        }
+
+        .services-container {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-item {
+          width: 250px;
+          height: 180px;
+        }
+
+        .service-card {
+          max-width: 100%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .hero {
+          height: 70vh;
+        }
+
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .service-content {
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="profile-container">
+        <img
+          src="https://imgv2-2-f.scribdassets.com/img/document/688870364/original/cc926c4eb3/1705796831?v=1"
+          alt="DE KING UPDATE"
+          class="profile-img"
+        />
+      </div>
+      <h1>DE KING</h1>
+      <p>
+        Premium professional services tailored to meet your needs with
+        excellence and precision
+      </p>
+    </section>
+
+    <!-- Scrolling Gallery Section -->
+    <section class="gallery-section">
+      <h2 class="section-title">MY SERVICES</h2>
+      <div class="scrolling-gallery" id="scrollingGallery">
+        <div class="gallery-item">
+          <img
+            src="https://imgv2-2-f.scribdassets.com/img/document/688870364/original/cc926c4eb3/1705796831?v=1"
+            alt="Service 1"
+          />
+          <div class="gallery-caption">Professional Format</div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://th.bing.com/th/id/OIP.RtB8sj6wI2vZ_Xs-KykmuwHaEK?rs=1&pid=ImgDetMain"
+            alt="Service 2"
+          />
+          <div class="gallery-caption">Video Call software</div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://hiviewsolutions.com/wp-content/uploads/2020/08/VoiceMobile-1024x685.jpg"
+            alt="Service 3"
+          />
+          <div class="gallery-caption">Celebrity Voice</div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://hiviewsolutions.com/wp-content/uploads/2020/08/VoiceMobile-1024x685.jpg"
+            alt="Service 4"
+          />
+          <div class="gallery-caption">Google Voice</div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://static.vecteezy.com/system/resources/thumbnails/007/184/271/small_2x/laptop-computer-and-air-tickets-on-table-online-ticket-booking-concept-free-photo.jpg"
+            alt="Service 5"
+          />
+          <div class="gallery-caption">Working Tickets</div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://th.bing.com/th/id/OIP.wupXLPhzDqRsiI3lnH2fDQHaFC?rs=1&pid=ImgDetMain"
+            alt="Service 6"
+          />
+          <div class="gallery-caption">Bombing Images</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+      <h2 class="section-title">Our Services</h2>
+      <div class="services-container">
+        <!-- Service Card 1 -->
+        <div class="service-card">
+          <div class="service-content">
+            <h2>Celebrity format</h2>
+            <h4>What You'll Get</h4>
+            <ul>
+              <li>Professional format and pictures</li>
+              <li>Comprehensive video tutorial</li>
+              <li>7 paying clients guaranteed</li>
+              <li>24/7 support for 30 days</li>
+              <li>Exclusive resources</li>
+            </ul>
+            <div class="price">NGN 380,000</div>
+            <a
+              href="https://wa.me/2349159307408?text=Boss%20Prince%20please%20I%20need%20the%20format%20I'm%20100%25%20ready"
+              class="cta-button"
+              >Click here to message me <i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="service-card">
+          <div class="service-content">
+            <h2>Truck/Car Update</h2>
+            <h4>What You'll Get</h4>
+            <ul>
+              <li>Premium format, templates and pictures</li>
+              <li>Step-by-step video guide</li>
+              <li>4 paying clients guaranteed</li>
+              <li>Daily check-ins</li>
+              <li>Resource library access</li>
+            </ul>
+            <div class="price">NGN 145,000</div>
+            <a
+              href="https://wa.me/2349159307408?text=Boss%20Prince%20please%20I%20need%20the%20Truck%20package%20I'm%20100%25%20ready"
+              class="cta-button"
+              >Click here to message me <i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="service-card">
+          <div class="service-content">
+            <h2>Real Estate format</h2>
+            <h4>What You'll Get</h4>
+            <ul>
+              <li>Basic format and guidelines</li>
+              <li>Instructional video</li>
+              <li>3 paying client guaranteed</li>
+              <li>20 Estate videos and pics inside/outside</li>
+              <li>Starter kit</li>
+            </ul>
+            <div class="price">NGN 90,000</div>
+            <a
+              href="https://wa.me/2349159307408?text=Boss%20Prince%20please%20I%20need%20the%20real%20estate%20package%20I'm%20100%25%20ready"
+              class="cta-button"
+              >Click here to message me <i class="fab fa-whatsapp"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="social-links"></div>
+      <p>&copy; 2025 DE KING UPDATE. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // Auto-scrolling gallery
+      document.addEventListener("DOMContentLoaded", function () {
+        const gallery = document.getElementById("scrollingGallery");
+        let scrollAmount = 0;
+        const scrollSpeed = 1; // Adjust speed here
+
+        function autoScroll() {
+          scrollAmount += scrollSpeed;
+          gallery.scrollLeft = scrollAmount;
+
+          // Reset scroll position when reaching the end
+          if (scrollAmount >= gallery.scrollWidth - gallery.clientWidth) {
+            scrollAmount = 0;
+            gallery.scrollLeft = 0;
+          }
+
+          requestAnimationFrame(autoScroll);
+        }
+
+        // Start auto-scrolling after a delay
+        setTimeout(() => {
+          autoScroll();
+        }, 2000);
+
+        // Pause scrolling on hover
+        gallery.addEventListener("mouseenter", () => {
+          scrollSpeed = 0;
+        });
+
+        gallery.addEventListener("mouseleave", () => {
+          scrollSpeed = 1;
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+      });
+
+      // Animation on scroll
+      const observerOptions = {
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animated");
+          }
+        });
+      }, observerOptions);
+
+      document
+        .querySelectorAll(".service-card, .gallery-item")
+        .forEach((element) => {
+          observer.observe(element);
+        });
+    </script>
+  </body>
+</html>
